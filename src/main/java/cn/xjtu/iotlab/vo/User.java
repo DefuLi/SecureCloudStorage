@@ -1,0 +1,63 @@
+package cn.xjtu.iotlab.vo;
+
+import java.util.List;
+
+public class User {
+    private Integer id;
+
+    private String name;
+
+    private String password;
+
+    private String avatar;
+    private List<String> access;
+
+    public List<String> getAccess() {
+        return access;
+    }
+
+    public void setAccess(List<String> access) {
+        this.access = access;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+}
