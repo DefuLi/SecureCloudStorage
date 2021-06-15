@@ -68,7 +68,7 @@ public class LoginController {
 
     //判断是否登录成功
     @ResponseBody
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public Object logOut(HttpServletRequest req, HttpSession session){
 
         return null;
