@@ -73,4 +73,20 @@ public class LoginController {
 
         return null;
     }
+
+    //判断是否登录成功
+    @ResponseBody
+    @RequestMapping(value = "/save_error_logger", method = RequestMethod.GET)
+    public Object saveErrorLogger(HttpServletRequest req, HttpSession session){
+
+        return "success";
+    }
+
+    //判断是否登录成功
+    @ResponseBody
+    @RequestMapping(value = "/message/count", method = RequestMethod.GET)
+    public Object messageCount(HttpServletRequest req, HttpSession session){
+
+        return 3;
+    }
 }
