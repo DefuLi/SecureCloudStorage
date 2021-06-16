@@ -16,19 +16,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@Controller
+@RequestMapping("cert")
 public class CertController {
 
     @Autowired
     private CertServiceImpl CertService;
 
-    @ResponseBody
-    @RequestMapping(value = "/cert/add", method = RequestMethod.POST)
     //生成证书
+    @ResponseBody
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public Object certProduce(HttpServletRequest req, HttpSession session){
         JSONObject jsonObject = new JSONObject();
 
-        String authorizedUser = req.getParameter("username");
+        String authorizedUser = req.getParameter("authoruser");
         String authorUser = req.getParameter("myname");
         String accesstype =req.getParameter("accesstype").trim();
         String sp=authorUser+"&"+authorizedUser+"&"+accesstype;
@@ -52,10 +52,10 @@ public class CertController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/cert/getlist", method = RequestMethod.GET)
+    @RequestMapping(value = "/getlist", method = RequestMethod.GET)
     public Object certList(HttpServletRequest req) {
         JSONObject jsonObject = new JSONObject();
-        String authorUser = req.getParameter("authorname").trim();
+        String authorUser = req.getParameter("authoruser");
         return CertService.certList(authorUser);
     }
 }
