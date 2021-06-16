@@ -2,6 +2,7 @@ package cn.xjtu.iotlab.controller;
 
 import cn.xjtu.iotlab.service.LoginService;
 import cn.xjtu.iotlab.service.impl.LoginServiceImpl;
+import cn.xjtu.iotlab.utils.ExcelEncDecUtil;
 import cn.xjtu.iotlab.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -76,7 +77,7 @@ public class LoginController {
 
     //判断是否登录成功
     @ResponseBody
-    @RequestMapping(value = "/save_error_logger", method = RequestMethod.GET)
+    @RequestMapping(value = "/save_error_logger", method = RequestMethod.POST)
     public Object saveErrorLogger(HttpServletRequest req, HttpSession session){
 
         return "success";
