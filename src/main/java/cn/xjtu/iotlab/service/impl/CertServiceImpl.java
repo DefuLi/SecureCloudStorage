@@ -24,4 +24,7 @@ public class CertServiceImpl implements CertService {
     {
         return CertMapper.certList(authorUser);
     }
+
+    @Override
+    public boolean deleteCert(Cert cert){return CertMapper.deleteCert(cert)>0?true:false;}
 }

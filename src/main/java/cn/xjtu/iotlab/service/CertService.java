@@ -7,4 +7,5 @@ import java.util.List;
 public interface CertService {
     public boolean addCert(Cert cert);
     List<Cert> certList(String authorUser);
+    boolean deleteCert(Cert cert);
 }

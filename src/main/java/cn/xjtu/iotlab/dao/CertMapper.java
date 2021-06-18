@@ -9,4 +9,5 @@ import java.util.List;
 public interface CertMapper {
     int addCert(Cert cert);
     List<Cert> certList(String authorUser);
+    int deleteCert(Cert cert);
 }

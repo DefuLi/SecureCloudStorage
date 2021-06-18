@@ -58,4 +58,29 @@ public class CertController {
         String authorUser = req.getParameter("authoruser");
         return CertService.certList(authorUser);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public Object deleteCert(HttpServletRequest req){
+        JSONObject jsonObject = new JSONObject();
+        Cert cert = new Cert();
+        String authorizedUser = req.getParameter("authorizeduser");
+        String authorUser = req.getParameter("authoruser");
+        String accesstype =req.getParameter("accesstype");
+        String sp=authorUser+"&"+authorizedUser+"&"+accesstype;
+        cert.setAuthorizeduser(authorizedUser);
+        cert.setAuthoruser(authorUser);
+        cert.setAccesstype(accesstype);
+        cert.setCert(sp);
+        boolean res = CertService.deleteCert(cert);
+        if(res){
+            jsonObject.put("code", 1);
+            jsonObject.put("msg", "证书删除成功");
+            return jsonObject;
+        }else{
+            jsonObject.put("code", 0);
+            jsonObject.put("msg", "证书删除失败");
+            return jsonObject;
+        }
+    }
 }

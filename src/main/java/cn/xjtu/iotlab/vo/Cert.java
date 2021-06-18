@@ -1,8 +1,12 @@
 package cn.xjtu.iotlab.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Cert {
+    @JsonIgnore
     private Integer id;
     private String cert;
+    @JsonIgnore
     private String authoruser;
     private String authorizeduser;
     private String accesstype;
