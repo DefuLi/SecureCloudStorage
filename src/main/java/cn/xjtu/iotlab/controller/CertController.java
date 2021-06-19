@@ -16,19 +16,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@Controller
+@RequestMapping("cert")
 public class CertController {
 
     @Autowired
     private CertServiceImpl CertService;
 
-    @ResponseBody
-    @RequestMapping(value = "/cert/add", method = RequestMethod.POST)
     //生成证书
+    @ResponseBody
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public Object certProduce(HttpServletRequest req, HttpSession session){
         JSONObject jsonObject = new JSONObject();
 
-        String authorizedUser = req.getParameter("username");
+        String authorizedUser = req.getParameter("authoruser");
         String authorUser = req.getParameter("myname");
         String accesstype =req.getParameter("accesstype").trim();
         String sp=authorUser+"&"+authorizedUser+"&"+accesstype;
@@ -52,10 +52,35 @@ public class CertController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/cert/getlist", method = RequestMethod.GET)
+    @RequestMapping(value = "/getlist", method = RequestMethod.GET)
     public Object certList(HttpServletRequest req) {
         JSONObject jsonObject = new JSONObject();
-        String authorUser = req.getParameter("authorname").trim();
+        String authorUser = req.getParameter("authoruser");
         return CertService.certList(authorUser);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public Object deleteCert(HttpServletRequest req){
+        JSONObject jsonObject = new JSONObject();
+        Cert cert = new Cert();
+        String authorizedUser = req.getParameter("authorizeduser");
+        String authorUser = req.getParameter("authoruser");
+        String accesstype =req.getParameter("accesstype");
+        String sp=authorUser+"&"+authorizedUser+"&"+accesstype;
+        cert.setAuthorizeduser(authorizedUser);
+        cert.setAuthoruser(authorUser);
+        cert.setAccesstype(accesstype);
+        cert.setCert(sp);
+        boolean res = CertService.deleteCert(cert);
+        if(res){
+            jsonObject.put("code", 1);
+            jsonObject.put("msg", "证书删除成功");
+            return jsonObject;
+        }else{
+            jsonObject.put("code", 0);
+            jsonObject.put("msg", "证书删除失败");
+            return jsonObject;
+        }
     }
 }
