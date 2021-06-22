@@ -13,5 +13,9 @@ import java.util.List;
  */
 @Repository
 public interface MessageMapper {
-    List<Message> loopMessage(String authorUser);
+    List<Message> loopUnReadMessage(String authorUser);
+
+    List<Message> loopReadedMessage(String authorUser);
+
+    List<Message> loopTrashList(String authorUser);
 }
