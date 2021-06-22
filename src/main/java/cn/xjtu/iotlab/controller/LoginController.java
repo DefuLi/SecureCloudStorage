@@ -67,7 +67,7 @@ public class LoginController {
         String token = req.getParameter("token");
         User user = loginService.getUserByToken(token);
         List<String> access = new ArrayList<>();
-        access.add("admin");
+        access.add(token);
         user.setAccess(access);
         return user;
     }
