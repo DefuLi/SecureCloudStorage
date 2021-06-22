@@ -64,7 +64,7 @@ public class FileManagerController {
         jsonObject.put("Message", "操作成功");
         jsonObject.put("StatusCode",200);
         jsonObject.put("CallbackType", null);
-        jsonObject.put("Data", filesManagerService.getAllFileList(userName));
+        jsonObject.put("Data", filesManagerService.getAllFileList("admin"));
 
         return jsonObject;
     }
