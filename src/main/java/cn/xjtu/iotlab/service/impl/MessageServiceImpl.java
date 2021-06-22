@@ -31,4 +31,24 @@ public class MessageServiceImpl implements MessageService {
     public List<Message> loopTrashMessage(String authorUser) {
         return messageMapper.loopTrashMessage(authorUser);
     }
+
+    @Override
+    public void apply(Message message) {
+        messageMapper.apply(message);
+    }
+
+    @Override
+    public void hasRead(int id) {
+        messageMapper.hasRead(id);
+    }
+
+    @Override
+    public void removeReaded(int id) {
+        messageMapper.removeReaded(id);
+    }
+
+    @Override
+    public void restoreTrash(int id) {
+        messageMapper.restoreTrash(id);
+    }
 }

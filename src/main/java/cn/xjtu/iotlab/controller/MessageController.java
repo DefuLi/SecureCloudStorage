@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,7 +30,7 @@ public class MessageController {
     MessageService messageService;
 
     @RequestMapping(value = "/init", method = RequestMethod.POST)
-    public Object init(HttpServletRequest req, HttpSession session){
+    public Object init(HttpServletRequest req, HttpSession session) {
         String authorUser = req.getParameter("authorUser");
         List<Message> unReadList = MessageConstants.unReadMap.get(authorUser);
         List<Message> readedList = MessageConstants.readedMap.get(authorUser);
@@ -43,4 +44,64 @@ public class MessageController {
         return jsonObject;
     }
 
+    @RequestMapping(value = "/apply", method = RequestMethod.POST)
+    public Object apply(HttpServletRequest req, HttpSession session) {
+        String authorUser = req.getParameter("authorUser");
+        String authorizedUser = req.getParameter("authorizedUser");
+        int readWrite = Integer.parseInt(req.getParameter("readWrite"));
+        String title = req.getParameter("title");
+
+        int messageRead = 0;
+        Date createTime = new Date();
+        Message message = new Message();
+        message.setAuthorUser(authorUser);
+        message.setAuthorizedUser(authorizedUser);
+        message.setReadWrite(readWrite);
+        message.setMessageRead(messageRead);
+        message.setCreateTime(createTime);
+        message.setTitle(title);
+
+        try {
+            messageService.apply(message);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @RequestMapping(value = "/hasRead", method = RequestMethod.POST)
+    public Object hasRead(HttpServletRequest req, HttpSession session) {
+        int id = Integer.parseInt(req.getParameter("msg_id"));
+        try {
+            messageService.hasRead(id);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @RequestMapping(value = "/removeReaded", method = RequestMethod.POST)
+    public Object removeReaded(HttpServletRequest req, HttpSession session) {
+        int id = Integer.parseInt(req.getParameter("msg_id"));
+        try {
+            messageService.removeReaded(id);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @RequestMapping(value = "/restoreTrash", method = RequestMethod.POST)
+    public Object restoreTrash(HttpServletRequest req, HttpSession session) {
+        int id = Integer.parseInt(req.getParameter("msg_id"));
+        try {
+            messageService.restoreTrash(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

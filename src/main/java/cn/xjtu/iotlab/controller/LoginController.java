@@ -32,6 +32,9 @@ public class LoginController {
     @Autowired
     private LoginServiceImpl loginService;
 
+    @Autowired
+    private MessageThreads messageThreads;
+
     //判断是否登录成功
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -54,8 +57,8 @@ public class LoginController {
             jsonObject.put("msg", "用户名或密码错误");
         }
 
-        Runnable runnable = MessageThreads.getInstance().createTask(userName);
-        MessageThreads.getInstance().executeTask(runnable, userName);
+        Runnable runnable = messageThreads.createTask(userName);
+        messageThreads.executeTask(runnable, userName);
         return jsonObject;
     }
 

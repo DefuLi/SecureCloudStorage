@@ -28,26 +28,18 @@ public class MessageThreads {
     @Autowired
     MessageService messageService;
 
-    private static ExecutorService executorService;
-
-    private static MessageThreads instance = new MessageThreads();
-
-    @PostConstruct
-    public void init() {
-        instance = this;
-        instance.messageService = this.messageService;
-    }
+    private ExecutorService executorService;
 
     /**
-     * 获取当前类的单例
+     * 获取线程池
      *
-     * @return MessageThreads对象
+     * @return ExecutorService对象
      */
-    public static final MessageThreads getInstance() {
+    public ExecutorService getExecutorService() {
         executorService = new ThreadPoolExecutor(
                 5, 10, 60L,
                 TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(5));
-        return instance;
+        return executorService;
     }
 
     /**
@@ -85,7 +77,6 @@ public class MessageThreads {
                 }
             }
         };
-
         return runnable;
     }
 

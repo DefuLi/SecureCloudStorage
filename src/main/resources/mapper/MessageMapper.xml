@@ -22,4 +22,21 @@
     <select id="loopTrashMessage" resultMap="BaseResultMap">
         select * from message where authoruser=#{0} and messageread=2
     </select>
+
+    <insert id = "apply" parameterType="cn.xjtu.iotlab.vo.Message">
+        insert into message(authoruser, authorizeduser, readwrite, messageread, createtime, title)
+        values(#{authorUser}, #{authorizedUser}, #{readWrite}, #{messageread}, #{createTime}, #{title})
+    </insert>
+
+    <update id="hasRead">
+        update message set messageread=1 where id=#{id}
+    </update>
+
+    <update id="removeReaded">
+        update message set messageread=2 where id=#{id}
+    </update>
+
+    <update id="restoreTrash">
+        update message set messageread=1 where id=#{id}
+    </update>
 </mapper>
