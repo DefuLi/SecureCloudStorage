@@ -3,6 +3,7 @@ package cn.xjtu.iotlab.controller;
 import cn.xjtu.iotlab.service.LoginService;
 import cn.xjtu.iotlab.service.impl.FilesManagerServiceImpl;
 import cn.xjtu.iotlab.service.impl.LoginServiceImpl;
+import cn.xjtu.iotlab.threads.MessageThreads;
 import cn.xjtu.iotlab.utils.ExcelEncDecUtil;
 import cn.xjtu.iotlab.vo.Files;
 import cn.xjtu.iotlab.vo.User;
@@ -27,8 +28,6 @@ import java.util.*;
 @Controller
 @Slf4j
 public class LoginController {
-
-
 
     @Autowired
     private LoginServiceImpl loginService;
@@ -55,6 +54,8 @@ public class LoginController {
             jsonObject.put("msg", "用户名或密码错误");
         }
 
+        Runnable runnable = MessageThreads.getInstance().createTask(userName);
+        MessageThreads.getInstance().executeTask(runnable, userName);
         return jsonObject;
     }
 

@@ -13,5 +13,5 @@ import java.util.List;
 public interface MessageService {
     List<Message> loopUnReadMessage(String authorUser);
     List<Message> loopReadedMessage(String authorUser);
-    List<Message> loopTrashList(String authorUser);
+    List<Message> loopTrashMessage(String authorUser);
 }

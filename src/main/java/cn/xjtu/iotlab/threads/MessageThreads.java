@@ -2,11 +2,14 @@ package cn.xjtu.iotlab.threads;
 
 import cn.xjtu.iotlab.constant.MessageConstants;
 import cn.xjtu.iotlab.service.MessageService;
+import cn.xjtu.iotlab.service.impl.MessageServiceImpl;
 import cn.xjtu.iotlab.vo.Message;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -19,6 +22,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2021/6/22 8:43
  */
 @Slf4j
+@Component
 public class MessageThreads {
 
     @Autowired
@@ -26,9 +30,12 @@ public class MessageThreads {
 
     private static ExecutorService executorService;
 
-    private static final MessageThreads instance = new MessageThreads();
+    private static MessageThreads instance = new MessageThreads();
 
-    private MessageThreads() {
+    @PostConstruct
+    public void init() {
+        instance = this;
+        instance.messageService = this.messageService;
     }
 
     /**
@@ -66,9 +73,12 @@ public class MessageThreads {
                 while (true) {
                     try {
                         Thread.sleep(3000);
-                        MessageConstants.unReadList = messageService.loopUnReadMessage(authorUser);
-                        MessageConstants.readedList = messageService.loopReadedMessage(authorUser);
-                        MessageConstants.trashList = messageService.loopTrashList(authorUser);
+                        log.info("unRead:{}", messageService.loopUnReadMessage(authorUser));
+                        log.info("readed:{}", messageService.loopReadedMessage(authorUser));
+                        log.info("trash:{}", messageService.loopTrashMessage(authorUser));
+                        MessageConstants.unReadMap.put(authorUser, messageService.loopUnReadMessage(authorUser));
+                        MessageConstants.readedMap.put(authorUser, messageService.loopReadedMessage(authorUser));
+                        MessageConstants.trashMap.put(authorUser, messageService.loopTrashMessage(authorUser));
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

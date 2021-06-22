@@ -17,5 +17,5 @@ public interface MessageMapper {
 
     List<Message> loopReadedMessage(String authorUser);
 
-    List<Message> loopTrashList(String authorUser);
+    List<Message> loopTrashMessage(String authorUser);
 }
