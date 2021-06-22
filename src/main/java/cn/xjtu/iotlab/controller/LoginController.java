@@ -6,6 +6,7 @@ import cn.xjtu.iotlab.service.impl.LoginServiceImpl;
 import cn.xjtu.iotlab.utils.ExcelEncDecUtil;
 import cn.xjtu.iotlab.vo.Files;
 import cn.xjtu.iotlab.vo.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import java.util.*;
 
 @RestController
 @Controller
+@Slf4j
 public class LoginController {
 
 
@@ -48,12 +50,12 @@ public class LoginController {
             jsonObject.put("msg", "登录成功");
             jsonObject.put("token", userName);
             session.setAttribute("userName", userName);
-            return jsonObject;
         } else {
             jsonObject.put("code", 0);
             jsonObject.put("msg", "用户名或密码错误");
-            return jsonObject;
         }
+
+        return jsonObject;
     }
 
     //判断是否登录成功
@@ -61,15 +63,11 @@ public class LoginController {
     @RequestMapping(value = "/get_info", method = RequestMethod.GET)
     public Object loginGetInfo(HttpServletRequest req, HttpSession session){
         JSONObject jsonObject = new JSONObject();
-
         String token = req.getParameter("token");
-
         User user = loginService.getUserByToken(token);
-
         List<String> access = new ArrayList<>();
         access.add("admin");
         user.setAccess(access);
-
         return user;
     }
 
