@@ -1,8 +1,10 @@
 package cn.xjtu.iotlab.controller;
 
 import cn.xjtu.iotlab.service.LoginService;
+import cn.xjtu.iotlab.service.impl.FilesManagerServiceImpl;
 import cn.xjtu.iotlab.service.impl.LoginServiceImpl;
 import cn.xjtu.iotlab.utils.ExcelEncDecUtil;
+import cn.xjtu.iotlab.vo.Files;
 import cn.xjtu.iotlab.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,13 +17,16 @@ import com.alibaba.fastjson.JSONObject;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.*;
 
 @RestController
 @Controller
 public class LoginController {
+
+
 
     @Autowired
     private LoginServiceImpl loginService;
@@ -35,6 +40,7 @@ public class LoginController {
 
         String userName = req.getParameter("userName");
         String password = req.getParameter("password");
+//        System.out.println(userName + "," + password);
 
         boolean res = loginService.verifyPasswd(userName, password);
         if (res) {
@@ -90,4 +96,7 @@ public class LoginController {
 
         return 3;
     }
+
+
+
 }
