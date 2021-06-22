@@ -35,4 +35,14 @@ public class FilesManagerServiceImpl implements FilesManagerService {
     public Set<Integer> getAllId(){
         return filesManagerMapper.getAllId();
     }
+
+    //删除数据库所有内容
+    public void deleteAll(){
+        filesManagerMapper.deleteAll();
+    }
+
+    //获取用户根目录文件
+    public List<Files> getRootFile(String userName){
+        return filesManagerMapper.getRootFile(userName);
+    }
 }

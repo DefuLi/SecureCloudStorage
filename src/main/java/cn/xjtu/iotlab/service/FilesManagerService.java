@@ -17,4 +17,10 @@ public interface FilesManagerService {
 
     //获取数据库中所有id
     public Set<Integer> getAllId();
+
+    //删除数据库所有内容
+    public void deleteAll();
+
+    //获取用户根目录文件
+    public List<Files> getRootFile(String userName);
 }
