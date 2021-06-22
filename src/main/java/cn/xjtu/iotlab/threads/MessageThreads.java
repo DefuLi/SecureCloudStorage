@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  * @author Defu Li
  * @date 2021/6/22 8:43
  */
-@Component
+
 public class MessageThreads {
     public static final ExecutorService executorService = new ThreadPoolExecutor(
             5, 10, 60L,
