@@ -1,7 +1,11 @@
 package cn.xjtu.iotlab.threads;
 
+import cn.xjtu.iotlab.constant.MessageConstants;
+import cn.xjtu.iotlab.service.MessageService;
+import cn.xjtu.iotlab.vo.Message;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
@@ -16,6 +20,10 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 public class MessageThreads {
+
+    @Autowired
+    MessageService messageService;
+
     private static ExecutorService executorService;
 
     private static final MessageThreads instance = new MessageThreads();
@@ -58,8 +66,9 @@ public class MessageThreads {
                 while (true) {
                     try {
                         Thread.sleep(3000);
-                        // TODO 查数据库
-
+                        MessageConstants.unReadList = messageService.loopUnReadMessage(authorUser);
+                        MessageConstants.readedList = messageService.loopReadedMessage(authorUser);
+                        MessageConstants.trashList = messageService.loopTrashList(authorUser);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
