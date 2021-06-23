@@ -17,8 +17,12 @@
 
     </resultMap>
 
-    <select id="getAllFileList" resultType="cn.xjtu.iotlab.vo.Files">
-        select * from fileList
+    <select id="getAllFileList" parameterType="java.lang.String" resultType="cn.xjtu.iotlab.vo.Files">
+        select * from fileList where CreateUserName = #{CreateUserName}
+    </select>
+
+    <select id="getRootFile" parameterType="java.lang.String" resultType="cn.xjtu.iotlab.vo.Files">
+        select * from fileList where ParentId = 0 and CreateUserName = #{CreateUserName}
     </select>
 
     <insert id = "insertFiles" parameterType="cn.xjtu.iotlab.vo.Files">
@@ -33,4 +37,8 @@
     <select id="getAllId" resultType="java.lang.Integer">
         select Id as Id from fileList
     </select>
+
+    <delete id="deleteAll">
+        delete from fileList
+    </delete>
 </mapper>

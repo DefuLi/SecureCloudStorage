@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xjtu.iotlab.dao.MessageMapper">
+    <resultMap id="BaseResultMap" type="cn.xjtu.iotlab.vo.Message">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="authoruser" jdbcType="INTEGER" property="authorUser"/>
+        <result column="authorizeduser" jdbcType="VARCHAR" property="authorizedUser"/>
+        <result column="readwrite" jdbcType="VARCHAR" property="readWrite"/>
+        <result column="messageread" jdbcType="VARCHAR" property="messageRead"/>
+        <result column="createtime" jdbcType="DATE" property="createTime"/>
+        <result column="title" jdbcType="DATE" property="title"/>
+    </resultMap>
+
+    <select id="loopUnReadMessage" resultMap="BaseResultMap">
+        select * from message where authoruser=#{0} and messageread=0
+    </select>
+
+    <select id="loopReadedMessage" resultMap="BaseResultMap">
+        select * from message where authoruser=#{0} and messageread=1
+    </select>
+
+    <select id="loopTrashMessage" resultMap="BaseResultMap">
+        select * from message where authoruser=#{0} and messageread=2
+    </select>
+
+    <insert id = "apply" parameterType="cn.xjtu.iotlab.vo.Message">
+        insert into message(authoruser, authorizeduser, readwrite, messageread, createtime, title)
+        values(#{authorUser}, #{authorizedUser}, #{readWrite}, #{messageread}, #{createTime}, #{title})
+    </insert>
+
+    <update id="hasRead">
+        update message set messageread=1 where id=#{id}
+    </update>
+
+    <update id="removeReaded">
+        update message set messageread=2 where id=#{id}
+    </update>
+
+    <update id="restoreTrash">
+        update message set messageread=1 where id=#{id}
+    </update>
+</mapper>
