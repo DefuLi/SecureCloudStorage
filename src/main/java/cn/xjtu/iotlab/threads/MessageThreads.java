@@ -49,6 +49,7 @@ public class MessageThreads {
      * @param authorUser 用户
      */
     public void executeTask(Runnable runnable, String authorUser) {
+        ExecutorService executorService = getExecutorService();
         executorService.execute(runnable);
         log.info("用户:{}的消息轮询任务已提交", authorUser);
     }

@@ -5,10 +5,10 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="authoruser" jdbcType="INTEGER" property="authorUser"/>
         <result column="authorizeduser" jdbcType="VARCHAR" property="authorizedUser"/>
-        <result column="readwrite" jdbcType="VARCHAR" property="readWrite"/>
-        <result column="messageread" jdbcType="VARCHAR" property="messageRead"/>
-        <result column="createtime" jdbcType="DATE" property="createTime"/>
-        <result column="title" jdbcType="DATE" property="title"/>
+        <result column="readwrite" jdbcType="INTEGER" property="readWrite"/>
+        <result column="messageread" jdbcType="INTEGER" property="messageRead"/>
+        <result column="createtime" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
     </resultMap>
 
     <select id="loopUnReadMessage" resultMap="BaseResultMap">

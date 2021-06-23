@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -29,18 +32,38 @@ public class MessageController {
     @Autowired
     MessageService messageService;
 
-    @RequestMapping(value = "/init", method = RequestMethod.POST)
-    public Object init(HttpServletRequest req, HttpSession session) {
+    @RequestMapping(value = "/init", method = RequestMethod.GET)
+    public Object init(HttpServletRequest req, HttpSession session){
         String authorUser = req.getParameter("authorUser");
         List<Message> unReadList = MessageConstants.unReadMap.get(authorUser);
         List<Message> readedList = MessageConstants.readedMap.get(authorUser);
         List<Message> trashList = MessageConstants.trashMap.get(authorUser);
 
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("unReadList", unReadList);
-        jsonObject.put("readedList", readedList);
-        jsonObject.put("trashList", trashList);
+        jsonObject.put("unread", unReadList);
+        jsonObject.put("readed", readedList);
+        jsonObject.put("trash", trashList);
 
+        return jsonObject;
+    }
+
+    @RequestMapping(value = "/count", method = RequestMethod.GET)
+    public Object count(HttpServletRequest req, HttpSession session){
+        String authorUser = req.getParameter("authorUser");
+        List<Message> unReadList = MessageConstants.unReadMap.get(authorUser);
+        if(unReadList!=null){
+            return unReadList.size();
+        }
+        return 0;
+    }
+
+    //展示用户行为
+    @ResponseBody
+    @RequestMapping(value = "/content", method = RequestMethod.GET)
+    public Object getContentByMsgId(HttpServletRequest req, HttpSession session){
+        List<Message> list1 = messageService.loopUnReadMessage("admin");
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("unread",list1);
         return jsonObject;
     }
 
