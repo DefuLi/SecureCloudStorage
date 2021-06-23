@@ -3,6 +3,7 @@ package cn.xjtu.iotlab.controller;
 import cn.xjtu.iotlab.service.LoginService;
 import cn.xjtu.iotlab.service.impl.FilesManagerServiceImpl;
 import cn.xjtu.iotlab.service.impl.LoginServiceImpl;
+import cn.xjtu.iotlab.threads.MessageThreads;
 import cn.xjtu.iotlab.utils.ExcelEncDecUtil;
 import cn.xjtu.iotlab.vo.Files;
 import cn.xjtu.iotlab.vo.User;
@@ -28,10 +29,11 @@ import java.util.*;
 @Slf4j
 public class LoginController {
 
-
-
     @Autowired
     private LoginServiceImpl loginService;
+
+    @Autowired
+    private MessageThreads messageThreads;
 
     //判断是否登录成功
     @ResponseBody
@@ -55,6 +57,8 @@ public class LoginController {
             jsonObject.put("msg", "用户名或密码错误");
         }
 
+        Runnable runnable = messageThreads.createTask(userName);
+        messageThreads.executeTask(runnable, userName);
         return jsonObject;
     }
 
@@ -66,7 +70,7 @@ public class LoginController {
         String token = req.getParameter("token");
         User user = loginService.getUserByToken(token);
         List<String> access = new ArrayList<>();
-        access.add("admin");
+        access.add(token);
         user.setAccess(access);
         return user;
     }
@@ -87,13 +91,6 @@ public class LoginController {
         return "success";
     }
 
-    //判断是否登录成功
-    @ResponseBody
-    @RequestMapping(value = "/message/count", method = RequestMethod.GET)
-    public Object messageCount(HttpServletRequest req, HttpSession session){
-
-        return 3;
-    }
 
 
 
