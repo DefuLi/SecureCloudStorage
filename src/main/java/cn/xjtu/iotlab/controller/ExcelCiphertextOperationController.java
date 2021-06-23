@@ -1,6 +1,7 @@
 package cn.xjtu.iotlab.controller;
 
 import cn.xjtu.iotlab.utils.ExcelEncDecUtil;
+import cn.xjtu.iotlab.utils.encdec.CESCMC;
 import cn.xjtu.iotlab.utils.encdec.OPEART;
 import cn.xjtu.iotlab.vo.Result;
 import com.alibaba.fastjson.JSON;
@@ -25,6 +26,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+
+import static cn.xjtu.iotlab.utils.ExcelEncDecUtil.*;
 
 @RestController
 @RequestMapping("excelOperation")
@@ -409,17 +412,444 @@ public class ExcelCiphertextOperationController {
     // 算术关键字加密
     @ResponseBody
     @RequestMapping(value = "/arithKeyEncrypt", method = RequestMethod.POST)
-    public Object arithKeyEncrypt(HttpServletRequest req, HttpSession session){
+    public void arithKeyEncrypt(HttpServletRequest req, HttpServletResponse response) throws IOException {
 
-        return "success";
+        JSONObject jsonObject = new JSONObject();
+        String key = req.getParameter("arithKey");//算术关键字
+        String result = "";
+
+
+        double keyvalue=0;	//关键字
+
+        int suanshumethod = Integer.valueOf(req.getParameter("arithMethod"));;//运算方法
+
+        int suanshutype=0;//记录条件
+        suanshutype = Integer.valueOf(req.getParameter("arithRecord"));
+        //double keyvalue=0;	//关键字
+
+        int localline=0;//选择条件中第几行
+
+        if(suanshutype==1){
+            localline = Integer.valueOf(req.getParameter("arithKey2"));
+        }
+        String baoxuinfo=req.getParameter("opeEncInfo"); //条件
+
+        String arithEncInfo =req.getParameter("arithEncInfo");//
+
+        try { //数字，
+            keyvalue=Double.parseDouble(key);
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+            System.out.println("请输入数值型的算术关键字");
+            return;
+        }
+////        if(suanshutype==1){//单行
+//            try { //数字，
+//                String localtmp=text4101.getText().toString().trim();//行
+//                if(localtmp.equals("") || key==null){
+//                    JOptionPane.showMessageDialog(mainPanel, "请输入行值");
+//                    return;
+//                }else{
+//                    localline=Integer.parseInt(localtmp);
+//                    if(localline> excelLine){
+//                        JOptionPane.showMessageDialog(mainPanel, "超过云端文件的最大行数  "+excelLine+" 行");
+//                        return;
+//                    }
+//                    else if(localline<=0){
+//                        JOptionPane.showMessageDialog(mainPanel, "请输入正整数的行值");
+//                        return;
+//                    }
+//                }
+//            }
+//            catch(Exception ex){
+//                ex.printStackTrace();
+//                JOptionPane.showMessageDialog(mainPanel, "请输入数值型的行值");
+//                return;
+//            }
+//        }
+//        else if(suanshutype==2){//保序条件选择
+//            String localtmp=texta46.getText().toString().trim();//
+//            if(localtmp.equals("") || key==null){
+//                JOptionPane.showMessageDialog(mainPanel, "请先进行保序关键字或范围的运算");
+//                return;
+//            }
+//        }
+        try{
+            //System.out.println("cescmc_n  "+cescmc_n);
+            //System.out.println("cescmc_k  "+cescmc_k);
+            CESCMC cescmc=null;
+
+//            String filepath=text42.getText();
+
+            String en_str="";		//关键字加密
+
+            cescmc=new CESCMC(cescmc_n,cescmc_k);
+            double sn=keyvalue;
+            double[][]en_sn=cescmc.encrypt(sn);			//被操作数加密
+
+            for(int i=0;i<cescmc_n;i++){
+                for(int k=0;k<cescmc_n;k++){
+                    en_str=en_str+en_sn[i][k]+",";
+                }
+                en_str=en_str+";";
+            }
+
+            String info="";
+
+            String suanshushuxing = req.getParameter("arithProperty");
+            info=suanshushuxing;//属性
+            info=info+"#"+suanshumethod;//运算方法
+            info=info+"#"+en_str;//关键字加密
+            info=info+"#"+suanshutype;//记录条件
+
+            if(suanshutype==0){//全部记录
+                info=info+"#"+0;//只是为了格式一样
+            }
+            else if(suanshutype==1){//单行记录
+                info=info+"#"+localline;//第几行
+            }
+            else{//保序条件选择
+                info=info+"#"+baoxuinfo;//第几行
+            }
+            arithEncInfo = info;//属性#运算方法#关键字加密#记录条件#记录条件详情
+            jsonObject.put("code",1);
+            result = ("算术关键字加密成功");
+        }
+        catch(Exception ex) {
+            jsonObject.put("code",-1);
+            ex.printStackTrace();
+        }
+
+        jsonObject.put("arithEncInfo",arithEncInfo);
+        jsonObject.put("result", result);
+
+        response.setContentType("text/html;charset=utf-8");
+        response.getWriter().write(jsonObject.toJSONString());
     }
 
     //算术运算
     @ResponseBody
     @RequestMapping(value = "/arithEncrypt", method = RequestMethod.POST)
-    public Object arithEncrypt(HttpServletRequest req, HttpSession session){
+    public void arithEncrypt(HttpServletRequest req, HttpServletResponse response) throws IOException {
+        JSONObject jsonObject = new JSONObject();
+        String key = req.getParameter("arithKey");//算术关键字
+        String result = "";
 
-        return "success";
+        String fileParentPath = req.getParameter("fileParentPath");//算术关键字
+
+        String filePath = req.getParameter("filePath");//算术关键字
+
+        double keyvalue=0;	//关键字
+
+        String arithEncInfo = req.getParameter("arithEncInfo");
+
+        //System.out.println("encinfo  "+encinfo);
+
+
+        int suanshushuxing=-1;//算术运算属性
+        int suanshumethod=-1;//算术运算方法
+        String suanshuenckey="";//关键字加密
+        int suanshutype=-1;//检索条件
+        String detal="";//检索条件的细节
+        int count=0;
+
+        String allinfoarr[]=arithEncInfo.split("#");
+        try{
+            suanshushuxing=Integer.parseInt(allinfoarr[0].substring(0,allinfoarr[0].indexOf(":")));//算术运算属性
+            suanshumethod=Integer.parseInt(allinfoarr[1]);//算术运算方法
+            suanshuenckey=allinfoarr[2];//关键字加密
+            suanshutype=Integer.parseInt(allinfoarr[3]);//检索条件
+            detal=allinfoarr[4];//检索条件的细节
+
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+        try{
+
+            FileInputStream finput = new FileInputStream(filePath);
+            POIFSFileSystem fs = new POIFSFileSystem(finput);
+            HSSFWorkbook wb = new HSSFWorkbook(fs);
+            HSSFSheet sheet = wb.getSheetAt(0);
+            HSSFRow row ;
+            HSSFCell cell;
+            int rsRows = sheet.getLastRowNum();
+            row = sheet.getRow(0);
+            int rsColumns =row.getLastCellNum();
+            double[][]en_sn= getMatrixFrom(suanshuenckey);
+            String[] st=suanshuenckey.split(";");
+
+            CESCMC cescmc = new CESCMC(cescmc_n,cescmc_k);
+            cescmc.dsum= st.length;
+
+            if(suanshutype==0){//全部记录
+
+
+                for(int j=1;j<=rsRows;j++) {
+                    row=sheet.getRow(j);
+                    cell = row.getCell(suanshushuxing);
+                    String str1=cell.getStringCellValue();
+                    double[][]en_sn2=getMatrixFrom(str1);
+                    double[][]en_result;  //
+                    String en_str1="";
+                    if(suanshumethod==0) {
+                        en_result=cescmc.add_sub(en_sn,en_sn2,1);
+
+                        for(int i=0;i<cescmc.dsum;i++){
+                            for(int k=0;k<cescmc.dsum;k++){
+                                en_str1=en_str1+en_result[i][k]+",";
+                            }
+                            en_str1=en_str1+";";
+                        }
+                    }
+
+                    else if(suanshumethod==1) {
+                        en_result=cescmc.add_sub(en_sn2,en_sn,2);
+                        // mathtype="____sub";
+                        for(int i=0;i<cescmc.dsum;i++){
+                            for(int k=0;k<cescmc.dsum;k++){
+                                en_str1=en_str1+en_result[i][k]+",";
+                            }
+                            en_str1=en_str1+";";
+                        }
+                    }
+
+                    else if(suanshumethod==2) {
+
+                        en_result=cescmc.mul(en_sn, en_sn2);
+                        // mathtype="____sub";
+                        for(int i=0;i<cescmc.dsum;i++){
+                            for(int k=0;k<cescmc.dsum;k++){
+                                en_str1=en_str1+en_result[i][k]+",";
+                            }
+                            en_str1=en_str1+";";
+                        }
+
+                    }
+                    else if(suanshumethod==3) {
+                        en_result=cescmc.div(en_sn2, en_sn);
+                        // mathtype="____sub";
+                        for(int i=0;i<cescmc.dsum;i++){
+                            for(int k=0;k<cescmc.dsum;k++){
+                                en_str1=en_str1+en_result[i][k]+",";
+                            }
+                            en_str1=en_str1+";";
+                        }
+
+                    }
+                    row.createCell(suanshushuxing).setCellValue(en_str1);
+                }
+                OutputStream fos = new FileOutputStream(filePath);
+                wb.write(fos);
+                fos.close();
+                count=rsRows;
+            }
+            else if(suanshutype==1){//单行记录
+                int selectnum=Integer.parseInt(detal);
+                row=sheet.getRow(selectnum);
+
+                cell = row.getCell(suanshushuxing);
+                String str1=cell.getStringCellValue();
+                double[][]en_sn2=getMatrixFrom(str1);
+                double[][]en_result;  //
+                String en_str1="";
+                if(suanshumethod==0) {
+                    en_result=cescmc.add_sub(en_sn,en_sn2,1);
+
+                    for(int i=0;i<cescmc.dsum;i++){
+                        for(int k=0;k<cescmc.dsum;k++){
+                            en_str1=en_str1+en_result[i][k]+",";
+                        }
+                        en_str1=en_str1+";";
+                    }
+                }
+
+                else if(suanshumethod==1) {
+                    en_result=cescmc.add_sub(en_sn2,en_sn,2);
+                    // mathtype="____sub";
+                    for(int i=0;i<cescmc.dsum;i++){
+                        for(int k=0;k<cescmc.dsum;k++){
+                            en_str1=en_str1+en_result[i][k]+",";
+                        }
+                        en_str1=en_str1+";";
+                    }
+                }
+                else if(suanshumethod==2) {
+                    en_result=cescmc.mul(en_sn, en_sn2);
+                    // mathtype="____sub";
+                    for(int i=0;i<cescmc.dsum;i++){
+                        for(int k=0;k<cescmc.dsum;k++){
+                            en_str1=en_str1+en_result[i][k]+",";
+                        }
+                        en_str1=en_str1+";";
+                    }
+
+                }
+                else if(suanshumethod==3) {
+                    en_result=cescmc.div(en_sn2, en_sn);
+                    // mathtype="____sub";
+                    for(int i=0;i<cescmc.dsum;i++){
+                        for(int k=0;k<cescmc.dsum;k++){
+                            en_str1=en_str1+en_result[i][k]+",";
+                        }
+                        en_str1=en_str1+";";
+                    }
+                }
+                row.createCell(suanshushuxing).setCellValue(en_str1);
+                OutputStream fos = new FileOutputStream(filePath);
+                wb.write(fos);
+                fos.close();
+                count=1;
+            }
+            else if(suanshutype==2){//检索条件
+                String infoarr[]=detal.split("\n");
+                int infoarrlength=infoarr.length;//检索条件的个数
+                int shuxingarrno[]=new int[infoarr.length];//检索条件的位置
+                int yunsuantype[]=new int[infoarr.length];//检索条件的类型
+                String enckey[]=new String[infoarr.length];//检索条件的关键字
+
+                for(int i=0;i<infoarr.length;i++){
+                    //System.out.println(infoarr[i]);
+                    String tmp[]=infoarr[i].split(";");
+                    //System.out.println("tmp.length  "+tmp.length);
+                    shuxingarrno[i]=Integer.parseInt(tmp[0].substring(0,tmp[0].indexOf(":")));//检索条件的位置
+                    yunsuantype[i]=Integer.parseInt(tmp[1]);//检索条件的类型
+                    enckey[i]=tmp[2];//检索条件的关键字
+                }
+                for(int l=1;l<rsRows;l++){
+                    row=sheet.getRow(l);
+                    boolean isfound=true;
+                    for(int j=0;j<infoarrlength;j++){
+                        cell=row.getCell(shuxingarrno[j]);
+                        String getexcle="";
+                        getexcle=cell.getStringCellValue();
+                        if(yunsuantype[j]==1){
+                            if(getexcle.equals(enckey[j])){
+                                continue;
+                            }else {
+                                isfound=false;
+                                break;
+                            }
+                        }
+                        else if(yunsuantype[j]==2){
+                            String lowuparr[]=enckey[j].split(",");
+                            String enc_low=lowuparr[0];
+                            String enc_up=lowuparr[1];
+                            int left=getexcle.compareTo(enc_low);
+                            int right=enc_up.compareTo(getexcle);
+                            if(left>=0 && right>=0){
+                                continue;
+                            }else {
+                                isfound=false;
+                                break;
+                            }
+                        }
+                        else if(yunsuantype[j]==3){
+                            int left=getexcle.compareTo(enckey[j]);
+                            if(left>=0){
+                                continue;
+                            }else {
+                                isfound=false;
+                                break;
+                            }
+                        }
+                        else if(yunsuantype[j]==4){
+                            int right=enckey[j].compareTo(getexcle);
+                            if(right>=0){
+                                continue;
+                            }else {
+                                isfound=false;
+                                break;
+                            }
+
+                        }
+                    }
+                    if(isfound){
+                        count++;
+                        cell = row.getCell(suanshushuxing);
+                        String str1=cell.getStringCellValue();
+                        double[][]en_sn2=getMatrixFrom(str1);
+                        double[][]en_result;  //
+                        String en_str1=""; //
+                        if(suanshumethod==0) {
+                            en_result=cescmc.add_sub(en_sn,en_sn2,1);
+
+                            for(int i=0;i<cescmc.dsum;i++){
+                                for(int k=0;k<cescmc.dsum;k++){
+                                    en_str1=en_str1+en_result[i][k]+",";
+                                }
+                                en_str1=en_str1+";";
+                            }
+                        }
+
+                        else if(suanshumethod==1) {
+                            en_result=cescmc.add_sub(en_sn2,en_sn,2);
+                            // mathtype="____sub";
+                            for(int i=0;i<cescmc.dsum;i++){
+                                for(int k=0;k<cescmc.dsum;k++){
+                                    en_str1=en_str1+en_result[i][k]+",";
+                                }
+                                en_str1=en_str1+";";
+                            }
+                        }
+
+                        else if(suanshumethod==2) {
+
+                            en_result=cescmc.mul(en_sn, en_sn2);
+                            // mathtype="____sub";
+                            for(int i=0;i<cescmc.dsum;i++){
+                                for(int k=0;k<cescmc.dsum;k++){
+                                    en_str1=en_str1+en_result[i][k]+",";
+                                }
+                                en_str1=en_str1+";";
+                            }
+
+                        }
+                        else if(suanshumethod==3) {
+                            en_result=cescmc.div(en_sn2, en_sn);
+                            // mathtype="____sub";
+                            for(int i=0;i<cescmc.dsum;i++){
+                                for(int k=0;k<cescmc.dsum;k++){
+                                    en_str1=en_str1+en_result[i][k]+",";
+                                }
+                                en_str1=en_str1+";";
+                            }
+                        }
+                        row.createCell(suanshushuxing).setCellValue(en_str1);
+                    }
+                    else{
+                    }
+                }
+                OutputStream fos = new FileOutputStream(filePath);
+                wb.write(fos);
+                fos.close();
+            }
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+            return ;
+        }
+        try {
+
+            String num= ""+count;
+            result = "算术运算成功，共运算 "+num+" 条记录.\n结果保存在"+filePath+"中";
+            arithEncInfo = "";
+
+            jsonObject.put("code",1);
+            jsonObject.put("result",result);
+            jsonObject.put("arithEncInfo",arithEncInfo);
+            System.out.println(result);
+
+        } catch (Exception ex) {
+            result="错误";
+            jsonObject.put("code",-1);
+            jsonObject.put("result",result);
+            ex.printStackTrace();
+            return ;
+        }
+        response.setContentType("text/html;charset=utf-8");
+        response.getWriter().write(jsonObject.toJSONString());
     }
 
     //打开文件
@@ -510,6 +940,7 @@ public class ExcelCiphertextOperationController {
 
                 jsonObject.put("opes",opes);
                 jsonObject.put("arith",arith);
+                jsonObject.put("rowCount",rsRows);
                 jsonObject.put("parentPath",parentPath);
 
                 response.setContentType("text/html;charset=utf-8");

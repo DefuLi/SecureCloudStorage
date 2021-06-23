@@ -2,10 +2,12 @@ package cn.xjtu.iotlab.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 
 /**
  * BF 文件加解密模块
@@ -15,7 +17,8 @@ public class BFEncDecController {
     //文件加密
     @ResponseBody
     @RequestMapping(value = "/BFEncrypt", method = RequestMethod.POST)
-    public Object BFEncrypt(HttpServletRequest req, HttpSession session){
+    public Object BFEncrypt(@RequestParam("file") File file ){
+
 
         //前端
         //保存

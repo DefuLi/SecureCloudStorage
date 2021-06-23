@@ -4,12 +4,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.security.KeyPair;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
 
 
-public class Cert {
+public class Cert1 {
 
 	public void produceCert(String myname,String username){
 		String res="";
@@ -68,9 +65,9 @@ public class Cert {
 		String res="";
 		try{
 			RSA1 arsa=new RSA1();
-			String sp=username+"&"+myname+"&"+aeskey+"&"+rsakey1+"&"+rsakey2+"&"+opeart_k+"&"+cescmc_k+"&"+cescmc_n;
+			String sp=myname+"&"+username+"&"+aeskey+"&"+rsakey1+"&"+rsakey2+"&"+opeart_k+"&"+cescmc_k+"&"+cescmc_n;
 			byte[] b1=arsa.StringTobytes(sp);
-			byte[] b2=arsa.encrypt(b1); 
+			byte[] b2=arsa.encrypt(b1);
 			res=arsa.bytesToString(b2);
 			ObjectOutputStream out;
 			out = new ObjectOutputStream(new FileOutputStream("D:\\qingyunclient\\test\\client\\cert_"+username+"_"+myname+"_1.txt"));
@@ -78,9 +75,23 @@ public class Cert {
 			out.close();	//System.out.println(res);
 		}catch(Exception e){
 			e.printStackTrace();
-		}	
+		}
 	}
-	
+
+	public String produceCert2(String myname,String username,String aeskey,String rsakey1,String rsakey2,long opeart_k,int cescmc_k,int cescmc_n){
+		String res="";
+        try {
+            RSA1 arsa = new RSA1();
+            String sp=username+"&"+myname+"&"+aeskey+"&"+rsakey1+"&"+rsakey2+"&"+opeart_k+"&"+cescmc_k+"&"+cescmc_n;
+            byte[] b1=arsa.StringTobytes(sp);
+            byte[] b2=arsa.encrypt(b1);
+            res=arsa.bytesToString(b2);
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+	}
 	
 	public String getCert(String username){
 		
@@ -144,9 +155,9 @@ public String getCert1(String myname,String username){
 	
 	
 	public static void main(String[] args) {
-		Cert cert=new Cert();
-		//cert.produceCert("hrw", "xufan");
-		cert.getCert("xufan");
+		Cert1 cert1 =new Cert1();
+		//cert1.produceCert("hrw", "xufan");
+		cert1.getCert("xufan");
 
 	}
 

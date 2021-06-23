@@ -1,7 +1,7 @@
 package cn.xjtu.iotlab.utils;
 
 import cn.xjtu.iotlab.utils.encdec.CESCMC;
-import cn.xjtu.iotlab.utils.encdec.Cert;
+import cn.xjtu.iotlab.utils.encdec.Cert1;
 import cn.xjtu.iotlab.utils.encdec.OPEART;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -9,7 +9,6 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -17,8 +16,8 @@ import java.io.OutputStream;
 
 public class ExcelEncDecUtil {
     public static long opeart_k=2568941234L;
-    public static int cescmc_k=1;
-    public static int cescmc_n=1;
+    public static int cescmc_k=47;
+    public static int cescmc_n=8;
     public static String head0="000000000000";
     public static String user_name;
 
@@ -110,8 +109,8 @@ public class ExcelEncDecUtil {
                             String othername=path;
                             othername=othername.substring(0,othername.lastIndexOf("__"));
                             othername=othername.substring(othername.lastIndexOf("__")+2);
-                            Cert cert=new Cert();
-                            String res=cert.getCert1(othername,user_name);
+                            Cert1 cert1 =new Cert1();
+                            String res= cert1.getCert1(othername,user_name);
                             if(res.equals("")){
                                 System.out.println(("你没有获得 " + othername + "的证书"));
                                 return 0;
@@ -220,8 +219,8 @@ public class ExcelEncDecUtil {
                         String othername=path;
                         othername=othername.substring(0,othername.lastIndexOf("__"));
                         othername=othername.substring(othername.lastIndexOf("__")+2);
-                        Cert cert=new Cert();
-                        String res=cert.getCert1(othername,user_name);
+                        Cert1 cert1 =new Cert1();
+                        String res= cert1.getCert1(othername,user_name);
                         if(res.equals("")){
 
                             System.out.println(("你没有获得 " + othername + "的证书"));
@@ -331,5 +330,23 @@ public class ExcelEncDecUtil {
             ex.printStackTrace();
             return 7;//加解密失败
         }
+    }
+
+    public static double[][] getMatrixFrom(String value){
+        String[] st=value.split(";");
+        //System.out.println("st.length"+st.length);
+        double[][]en_sn=new double[st.length][st.length];
+        for(int i=0;i<st.length;i++){
+            String[] st2=st[i].split(",");
+            try{
+                for(int k=0;k<st2.length;k++){
+                    en_sn[i][k]=Double.valueOf(st2[k]);
+                }
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        return en_sn;
     }
 }
