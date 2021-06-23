@@ -1,5 +1,6 @@
 package cn.xjtu.iotlab.service;
 
+import cn.xjtu.iotlab.vo.BFFile;
 import cn.xjtu.iotlab.vo.Files;
 
 import java.util.List;
@@ -23,4 +24,22 @@ public interface FilesManagerService {
 
     //获取用户根目录文件
     public List<Files> getRootFile(String userName);
+
+    //明文局部搜索
+    public List<Files> getFilesByNameLocal(String fileName, String userName);
+
+    //明文全局搜索
+    public List<Files> getFilesByNameGlobal(String fileName);
+
+    //插入文件的BF值
+    public void insertFilesBF(BFFile bfFile);
+
+    //根据文件名搜索Id
+    public int getIdByName(String fileName, String userName);
+
+    //BF局部搜索
+    public List<Files> getFilesByBFLocal(String bfValue, String userName);
+
+    //BF全局搜索
+    public List<Files> getFilesByBFGlobal(String bfValue);
 }

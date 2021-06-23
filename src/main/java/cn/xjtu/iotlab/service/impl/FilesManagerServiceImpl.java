@@ -2,6 +2,7 @@ package cn.xjtu.iotlab.service.impl;
 
 import cn.xjtu.iotlab.dao.FilesManagerMapper;
 import cn.xjtu.iotlab.service.FilesManagerService;
+import cn.xjtu.iotlab.vo.BFFile;
 import cn.xjtu.iotlab.vo.Files;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,35 @@ public class FilesManagerServiceImpl implements FilesManagerService {
     //获取用户根目录文件
     public List<Files> getRootFile(String userName){
         return filesManagerMapper.getRootFile(userName);
+    }
+
+    //明文局部搜索
+    public List<Files> getFilesByNameLocal(String fileName, String userName){
+        return filesManagerMapper.getFilesByNameLocal(fileName, userName);
+    }
+
+    //明文全局搜索
+    public List<Files> getFilesByNameGlobal(String fileName){
+        return filesManagerMapper.getFilesByNameGlobal(fileName);
+    }
+
+    //插入文件的BF值
+    public void insertFilesBF(BFFile bfFile){
+        filesManagerMapper.insertFilesBF(bfFile);
+    }
+
+    //根据文件名搜索Id
+    public int getIdByName(String fileName, String userName){
+        return filesManagerMapper.getIdByName(fileName, userName);
+    }
+
+    //BF局部搜索
+    public List<Files> getFilesByBFLocal(String bfValue, String userName){
+        return filesManagerMapper.getFilesByBFLocal(bfValue, userName);
+    }
+
+    //BF全局搜索
+    public List<Files> getFilesByBFGlobal(String bfValue){
+        return filesManagerMapper.getFilesByBFGlobal(bfValue);
     }
 }

@@ -168,7 +168,7 @@ public static void main(String[] args){
 		String a2=t.decrypt(a1); 
 		long t3=System.nanoTime();
 		
-    	System.out.println((t2-t1)/Math.pow(10,6)+"\n"); //+(t3-t2)/Math.pow(10,6)+"\n"); 
+    	System.out.println((t2-t1)/Math.pow(10,6)+"\n"); //+(t3-t2)/Math.pow(10,6)+"\n");
     	System.out.println(a1.length());
     	
     	

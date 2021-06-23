@@ -17,6 +17,18 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
+        <!-- 结巴分词 -->
+        <dependency>
+            <groupId>com.github.houbb</groupId>
+            <artifactId>segment</artifactId>
+            <version>0.1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.huaban</groupId>
+            <artifactId>jieba-analysis</artifactId>
+            <version>1.0.2</version>
+        </dependency>
         <!-- github测试 -->
         <dependency>
             <groupId>commons-io</groupId>
