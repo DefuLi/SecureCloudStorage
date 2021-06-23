@@ -5,8 +5,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LoginMapper {
-    public int verifyPasswd(String userName, String password);
+    int verifyPasswd(String userName, String password);
 
-    public User getUserByToken(String token);
+    int isApprove(String userName);
+
+    User getUserByToken(String token);
 
 }

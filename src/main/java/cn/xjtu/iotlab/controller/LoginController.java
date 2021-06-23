@@ -54,9 +54,9 @@ public class LoginController {
             session.setAttribute("userName", userName);
         } else {
             jsonObject.put("code", 0);
-            jsonObject.put("msg", "用户名或密码错误");
+            jsonObject.put("msg", "用户名或密码错误；或未经管理员审批！");
+            return jsonObject;
         }
-
         Runnable runnable = messageThreads.createTask(userName);
         messageThreads.executeTask(runnable, userName);
         return jsonObject;

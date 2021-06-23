@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xjtu.iotlab.dao.RegisterMapper">
+    <resultMap id="BaseResultMap" type="cn.xjtu.iotlab.vo.User">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="token" jdbcType="VARCHAR" property="token" />
+        <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+        <result column="approveflag" jdbcType="INTEGER" property="approveFlag" />
+    </resultMap>
+
+    <insert id = "register" parameterType="cn.xjtu.iotlab.vo.User">
+        insert into user(name, password, token, avatar, approveflag)
+        values(#{name}, #{password}, #{token}, #{avatar}, #{approveFlag})
+    </insert>
+
+</mapper>

@@ -2,14 +2,10 @@ package cn.xjtu.iotlab.threads;
 
 import cn.xjtu.iotlab.constant.MessageConstants;
 import cn.xjtu.iotlab.service.MessageService;
-import cn.xjtu.iotlab.service.impl.MessageServiceImpl;
-import cn.xjtu.iotlab.vo.Message;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -29,6 +25,8 @@ public class MessageThreads {
     MessageService messageService;
 
     private ExecutorService executorService;
+
+    private static final int SLEEP_TIME = 3000;
 
     /**
      * 获取线程池
@@ -65,7 +63,7 @@ public class MessageThreads {
             public void run() {
                 while (true) {
                     try {
-                        Thread.sleep(3000);
+                        Thread.sleep(SLEEP_TIME);
                         log.info("unRead:{}", messageService.loopUnReadMessage(authorUser));
                         log.info("readed:{}", messageService.loopReadedMessage(authorUser));
                         log.info("trash:{}", messageService.loopTrashMessage(authorUser));
