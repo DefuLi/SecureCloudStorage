@@ -41,4 +41,32 @@
     <delete id="deleteAll">
         delete from fileList
     </delete>
+
+    <select id="getFilesByNameLocal" parameterType="java.lang.String" resultType="cn.xjtu.iotlab.vo.Files">
+        select * from fileList where CreateUserName = #{1} and Name like #{0}
+    </select>
+
+    <select id="getFilesByNameGlobal" parameterType="java.lang.String" resultType="cn.xjtu.iotlab.vo.Files">
+        select * from fileList where Name like #{Name}
+    </select>
+
+    <insert id="insertFilesBF" parameterType="cn.xjtu.iotlab.vo.BFFile">
+        insert into fileBF(id, `name`, BFValue) values(#{id}, #{name}, #{BFValue})
+    </insert>
+
+    <select id="getIdByName" resultType="java.lang.Integer">
+        select Id from fileList where Name = #{0} and CreateUserName = #{1}
+    </select>
+
+    <select id="getFilesByBFLocal" parameterType="java.lang.String" resultType="cn.xjtu.iotlab.vo.Files">
+        select * from fileList where CreateUserName = #{1} and Id in(
+        select id from fileBF where BFValue = #{0}
+        )
+    </select>
+
+    <select id="getFilesByBFGlobal" resultType="cn.xjtu.iotlab.vo.Files">
+        select * from fileList where Id in(
+        select distinct id from fileBF where BFValue = #{bfValue}
+        )
+    </select>
 </mapper>
