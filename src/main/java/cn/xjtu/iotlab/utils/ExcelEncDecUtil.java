@@ -16,8 +16,8 @@ import java.io.OutputStream;
 
 public class ExcelEncDecUtil {
     public static long opeart_k=2568941234L;
-    public static int cescmc_k=1;
-    public static int cescmc_n=1;
+    public static int cescmc_k=47;
+    public static int cescmc_n=8;
     public static String head0="000000000000";
     public static String user_name;
 
@@ -330,5 +330,23 @@ public class ExcelEncDecUtil {
             ex.printStackTrace();
             return 7;//加解密失败
         }
+    }
+
+    public static double[][] getMatrixFrom(String value){
+        String[] st=value.split(";");
+        //System.out.println("st.length"+st.length);
+        double[][]en_sn=new double[st.length][st.length];
+        for(int i=0;i<st.length;i++){
+            String[] st2=st[i].split(",");
+            try{
+                for(int k=0;k<st2.length;k++){
+                    en_sn[i][k]=Double.valueOf(st2[k]);
+                }
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        return en_sn;
     }
 }
