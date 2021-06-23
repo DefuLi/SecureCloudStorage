@@ -57,4 +57,188 @@ public class Files {
     private String ProjectId;
     @JsonProperty("IdentityId")
     private int IdentityId;
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public int getParentId() {
+        return ParentId;
+    }
+
+    public void setParentId(int parentId) {
+        ParentId = parentId;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public String getDescribe() {
+        return Describe;
+    }
+
+    public void setDescribe(String describe) {
+        Describe = describe;
+    }
+
+    public String getCreateUserName() {
+        return CreateUserName;
+    }
+
+    public void setCreateUserName(String createUserName) {
+        CreateUserName = createUserName;
+    }
+
+    public Date getCreateTime() {
+        return CreateTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        CreateTime = createTime;
+    }
+
+    public Date getEditTime() {
+        return EditTime;
+    }
+
+    public void setEditTime(Date editTime) {
+        EditTime = editTime;
+    }
+
+    public String getEditBy() {
+        return EditBy;
+    }
+
+    public void setEditBy(String editBy) {
+        EditBy = editBy;
+    }
+
+    public int getType() {
+        return Type;
+    }
+
+    public void setType(int type) {
+        Type = type;
+    }
+
+    public int getFileType() {
+        return FileType;
+    }
+
+    public void setFileType(int fileType) {
+        FileType = fileType;
+    }
+
+    public Integer getSize() {
+        return Size;
+    }
+
+    public void setSize(Integer size) {
+        Size = size;
+    }
+
+    public String getSuffixName() {
+        return SuffixName;
+    }
+
+    public void setSuffixName(String suffixName) {
+        SuffixName = suffixName;
+    }
+
+    public String getParents() {
+        return Parents;
+    }
+
+    public void setParents(String parents) {
+        Parents = parents;
+    }
+
+    public String getRourceId() {
+        return RourceId;
+    }
+
+    public void setRourceId(String rourceId) {
+        RourceId = rourceId;
+    }
+
+    public String getWBSId() {
+        return WBSId;
+    }
+
+    public void setWBSId(String WBSId) {
+        this.WBSId = WBSId;
+    }
+
+    public int getRourceType() {
+        return RourceType;
+    }
+
+    public void setRourceType(int rourceType) {
+        RourceType = rourceType;
+    }
+
+    public int getISAllVisible() {
+        return ISAllVisible;
+    }
+
+    public void setISAllVisible(int ISAllVisible) {
+        this.ISAllVisible = ISAllVisible;
+    }
+
+    public int getPictuerCount() {
+        return PictuerCount;
+    }
+
+    public void setPictuerCount(int pictuerCount) {
+        PictuerCount = pictuerCount;
+    }
+
+    public int getFilesCount() {
+        return FilesCount;
+    }
+
+    public void setFilesCount(int filesCount) {
+        FilesCount = filesCount;
+    }
+
+    public String getFileId() {
+        return FileId;
+    }
+
+    public void setFileId(String fileId) {
+        FileId = fileId;
+    }
+
+    public int getPermissionType() {
+        return PermissionType;
+    }
+
+    public void setPermissionType(int permissionType) {
+        PermissionType = permissionType;
+    }
+
+    public String getProjectId() {
+        return ProjectId;
+    }
+
+    public void setProjectId(String projectId) {
+        ProjectId = projectId;
+    }
+
+    public int getIdentityId() {
+        return IdentityId;
+    }
+
+    public void setIdentityId(int identityId) {
+        IdentityId = identityId;
+    }
 }
