@@ -155,21 +155,36 @@ public class FileManagerController {
     //判断是否登录成功
     @ResponseBody
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public Object fileManagerPage(@RequestParam("file") MultipartFile multipartFile, @RequestParam("pathId") String pathId, @RequestParam("parentPathId") String parentPathId, HttpServletRequest req, HttpSession session) throws IOException {
-
+    public Object fileManagerPage(@RequestParam("userName") String userName, @RequestParam("file") MultipartFile multipartFile, @RequestParam("pathId") String pathId, @RequestParam("parentPathId") String parentPathId, HttpServletRequest req, HttpSession session) throws IOException {
+        System.out.println("userName: " + userName);
+        String basePath = "src/main/resources/iotlab/" + userName;
         List<Integer> results = new ArrayList<>();
         System.out.println(pathId);
+        String path = basePath + getFilePath(Integer.parseInt(pathId), userName) + "/" + multipartFile.getOriginalFilename();
+        System.out.println(path);
+//        System.out.println(path + multipartFile.getOriginalFilename());
 //        String directory = getDirectoryByPathId(pathId);
 
-
         //设置一个file的地址，和multipartFile.getOriginalFilename()进行拼接就行
-        java.io.File file = new File(multipartFile.getOriginalFilename());
+        java.io.File file = new File(path);
 
         //将multipartFile转换成本地File文件
         FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), file);
         //移动文件
 
         return "success";
+    }
+
+    public String getFilePath(int parentId, String userName){
+//        System.out.println("parent id: " + parentId);
+        int tempId = parentId;
+        StringBuilder tempPath = new StringBuilder();
+        while(tempId != 0){
+            Files tempFile = filesManagerService.searchById(tempId);
+            tempPath.insert(0,"/" + tempFile.getName());
+            tempId = tempFile.getParentId();
+        }
+        return tempPath.toString();
     }
 
 

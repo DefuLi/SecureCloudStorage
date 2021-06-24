@@ -45,4 +45,5 @@ public interface FilesManagerMapper {
 
     //BF全局搜索
     public List<Files> getFilesByBFGlobal(String bfValue);
+
 }
