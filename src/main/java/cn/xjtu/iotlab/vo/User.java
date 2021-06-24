@@ -4,12 +4,12 @@ import java.util.List;
 
 public class User {
     private Integer id;
-
     private String name;
-
     private String password;
     private String avatar;
     private List<String> access;
+    // 0为未经管理员审批，1为经过管理员审批
+    private Integer approveFlag;
 
     public List<String> getAccess() {
         return access;
@@ -51,14 +51,23 @@ public class User {
         this.password = password;
     }
 
+    public Integer getApproveFlag() {
+        return approveFlag;
+    }
+
+    public void setApproveFlag(Integer approveFlag) {
+        this.approveFlag = approveFlag;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", access=" + access +
+                ", approveFlag=" + approveFlag +
                 '}';
     }
-
-
 }

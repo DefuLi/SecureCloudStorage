@@ -15,7 +15,12 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public boolean verifyPasswd(String userName, String password) {
-        return loginMapper.verifyPasswd(userName, password)>0?true:false;
+        int approveFlag = loginMapper.isApprove(userName);
+        if (approveFlag == 1) {
+            return loginMapper.verifyPasswd(userName, password) > 0 ? true : false;
+        } else {
+            return false;
+        }
     }
 
     @Override

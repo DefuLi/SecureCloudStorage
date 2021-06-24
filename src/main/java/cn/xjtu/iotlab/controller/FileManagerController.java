@@ -8,17 +8,16 @@ import cn.xjtu.iotlab.utils.encdec.FileSearch;
 import cn.xjtu.iotlab.vo.BFFile;
 import cn.xjtu.iotlab.vo.Files;
 import com.alibaba.fastjson.JSONObject;
-import org.apache.tomcat.jni.File;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import sun.nio.cs.ext.SJIS;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
@@ -153,7 +152,40 @@ public class FileManagerController {
     }
 
 
+    //判断是否登录成功
+    @ResponseBody
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public Object fileManagerPage(@RequestParam("userName") String userName, @RequestParam("file") MultipartFile multipartFile, @RequestParam("pathId") String pathId, @RequestParam("parentPathId") String parentPathId, HttpServletRequest req, HttpSession session) throws IOException {
+        System.out.println("userName: " + userName);
+        String basePath = "src/main/resources/iotlab/" + userName;
+        List<Integer> results = new ArrayList<>();
+        System.out.println(pathId);
+        String path = basePath + getFilePath(Integer.parseInt(pathId), userName) + "/" + multipartFile.getOriginalFilename();
+        System.out.println(path);
+//        System.out.println(path + multipartFile.getOriginalFilename());
+//        String directory = getDirectoryByPathId(pathId);
 
+        //设置一个file的地址，和multipartFile.getOriginalFilename()进行拼接就行
+        java.io.File file = new File(path);
+
+        //将multipartFile转换成本地File文件
+        FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), file);
+        //移动文件
+
+        return "success";
+    }
+
+    public String getFilePath(int parentId, String userName){
+//        System.out.println("parent id: " + parentId);
+        int tempId = parentId;
+        StringBuilder tempPath = new StringBuilder();
+        while(tempId != 0){
+            Files tempFile = filesManagerService.searchById(tempId);
+            tempPath.insert(0,"/" + tempFile.getName());
+            tempId = tempFile.getParentId();
+        }
+        return tempPath.toString();
+    }
 
 
 }
