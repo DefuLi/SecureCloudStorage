@@ -27,7 +27,7 @@ public class CertController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public Object certProduce(@RequestParam("authorizeduser")String authorizeduser,@RequestParam("authoruser") String authoruser, @RequestParam("accesstype") int accesstype){
         JSONObject jsonObject = new JSONObject();
-        String aes_key="123456";
+        String aes_key="123456"+authoruser;
         String rsa_key1="123456";
         String rsa_key2="123456";
         long opeart_k=25689L;

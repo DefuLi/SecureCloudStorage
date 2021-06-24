@@ -5,6 +5,8 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -23,6 +25,7 @@ public class BFEncDecController {
         File file = new File(multipartFile.getOriginalFilename());
         FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), file);
         TestBF bf = new TestBF();
+        System.out.println(username);
         boolean signal= bf.filebfencrpt(file,username);
         //前端
         //保存
@@ -37,15 +40,21 @@ public class BFEncDecController {
 
     //文件解密
     @ResponseBody
-    @RequestMapping(value = "/BFDecrypt", method = RequestMethod.POST)
-    public Object BFDecrypt(HttpServletRequest req, HttpSession session){
-
-
+    @RequestMapping(value = "/bfdecrypt", method = RequestMethod.POST)
+    public int BFDecrypt(@RequestParam("file") MultipartFile multipartFile , @RequestParam("username") String username) throws IOException, BadPaddingException, IllegalBlockSizeException {
+        File file = new File(multipartFile.getOriginalFilename());
+        FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), file);
+        TestBF bf = new TestBF();
+        System.out.println(username);
+        boolean signal= bf.filebfdecrpt(file,username);
         //前端
         //保存
         //取消
-
-        return "success";
+        if(signal == true)
+            return 1;
+        else{
+            return 0;
+        }
     }
 
     //文件上传
