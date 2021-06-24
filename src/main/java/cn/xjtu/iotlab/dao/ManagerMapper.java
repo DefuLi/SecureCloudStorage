@@ -1,6 +1,10 @@
 package cn.xjtu.iotlab.dao;
 
+import cn.xjtu.iotlab.vo.Behavior;
+import cn.xjtu.iotlab.vo.User;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author Defu Li
@@ -9,4 +13,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ManagerMapper {
     void approve(String name);
+
+    List<User> getRegister();
+
+    Behavior userBehavior();
 }

@@ -51,32 +51,4 @@ public class RegisterController {
             return false;
         }
     }
-
-    @RequestMapping(value = "/getRegisters", method = RequestMethod.GET)
-    public void getRegister(HttpServletRequest req, HttpServletResponse response) throws IOException {
-        JSONObject jsonObject = new JSONObject();
-        List<LinkedHashMap> lists = new ArrayList<>();
-        for (int i=0;i<2;i++){
-            LinkedHashMap<String,String> hashMap = new LinkedHashMap<>();
-            hashMap.put("userName","test"+i);
-            hashMap.put("id",""+i);
-            hashMap.put("status","test@qq.com");
-            Date date = new Date(); // this object contains the current date value
-            SimpleDateFormat start = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String create_date = start.format(date);//结束时间
-            hashMap.put("createTime",create_date);
-            lists.add(hashMap);
-        }
-        jsonObject.put("tableData",lists);
-        response.setContentType("text/html;charset=utf-8");
-        response.getWriter().write(jsonObject.toJSONString());
-//        return jsonObject;
-    }
-
-    @RequestMapping(value = "/agree", method = RequestMethod.POST)
-    public int Agree(HttpServletRequest req, HttpServletResponse response) {
-        String user_id = req.getParameter("user_id");
-        System.out.println(user_id);
-        return 1;
-    }
 }
