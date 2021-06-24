@@ -1,0 +1,612 @@
+{\rtf1\ansi\ansicpg936\cocoartf2578
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset134 PingFangSC-Regular;}
+{\colortbl;\red255\green255\blue255;\red109\green109\blue109;\red23\green23\blue23;\red70\green137\blue204;
+\red202\green202\blue202;\red140\green211\blue254;\red194\green126\blue101;\red212\green214\blue154;\red89\green138\blue67;
+\red67\green192\blue160;\red167\green197\blue152;\red183\green111\blue179;\red66\green179\blue255;\red205\green173\blue106;
+}
+{\*\expandedcolortbl;;\cssrgb\c50196\c50196\c50196;\cssrgb\c11765\c11765\c11765;\cssrgb\c33725\c61176\c83922;
+\cssrgb\c83137\c83137\c83137;\cssrgb\c61176\c86275\c99608;\cssrgb\c80784\c56863\c47059;\cssrgb\c86275\c86275\c66667;\cssrgb\c41569\c60000\c33333;
+\cssrgb\c30588\c78824\c69020;\cssrgb\c70980\c80784\c65882;\cssrgb\c77255\c52549\c75294;\cssrgb\c30980\c75686\c100000;\cssrgb\c84314\c72941\c49020;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f0\fs24 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 <\cf4 \strokec4 template\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf5 \cb3   \cf2 \strokec2 <\cf4 \strokec4 div\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3     \cf2 \strokec2 <\cf4 \strokec4 wlExplorer\cf5 \cb1 \strokec5 \
+\cb3       \cf6 \strokec6 ref\cf5 \strokec5 =\cf7 \strokec7 "wl-explorer-cpt"\cf5 \cb1 \strokec5 \
+\cb3       :\cf6 \strokec6 header-dropdown\cf5 \strokec5 ="\cf6 \strokec6 headerHandle\cf5 \strokec5 "\cb1 \
+\cb3       :\cf6 \strokec6 upload-options\cf5 \strokec5 ="\cf6 \strokec6 uploadOptions\cf5 \strokec5 "\cb1 \
+\cb3       :\cf6 \strokec6 columns\cf5 \strokec5 ="\cf6 \strokec6 file_table_columns\cf5 \strokec5 "\cb1 \
+\cb3       :\cf6 \strokec6 all-path\cf5 \strokec5 ="\cf6 \strokec6 all_folder_list\cf5 \strokec5 "\cb1 \
+\cb3       :\cf6 \strokec6 is-folder-fn\cf5 \strokec5 ="\cf6 \strokec6 isFolderFn\cf5 \strokec5 "\cb1 \
+\cb3       :\cf6 \strokec6 folderType\cf5 \strokec5 ="\cf6 \strokec6 rource_type\cf5 \strokec5 "\cb1 \
+\cb3       :\cf6 \strokec6 data\cf5 \strokec5 ="\cf6 \strokec6 file_table_data\cf5 \strokec5 "\cb1 \
+\cb3       :\cf6 \strokec6 props\cf5 \strokec5 ="\cf6 \strokec6 explorer_prop\cf5 \strokec5 "\cb1 \
+\cb3       \cf6 \strokec6 size\cf5 \strokec5 =\cf7 \strokec7 "small"\cf5 \cb1 \strokec5 \
+\cb3       @\cf6 \strokec6 handleFolder\cf5 \strokec5 ="\cf6 \strokec6 handleFolder\cf5 \strokec5 "\cb1 \
+\cb3       @\cf6 \strokec6 upload\cf5 \strokec5 ="\cf6 \strokec6 fileUpload\cf5 \strokec5 "\cb1 \
+\cb3       @\cf6 \strokec6 download\cf5 \strokec5 ="\cf6 \strokec6 download\cf5 \strokec5 "\cb1 \
+\cb3       @\cf6 \strokec6 search\cf5 \strokec5 ="\cf6 \strokec6 fileSearch\cf5 \strokec5 "\cb1 \
+\cb3       @\cf6 \strokec6 del\cf5 \strokec5 ="\cf6 \strokec6 fileDel\cf5 \strokec5 "\cb1 \
+\cb3       @\cf6 \strokec6 closeFade\cf5 \strokec5 ="\cf8 \strokec8 closeOtherLayout\cf5 \strokec5 (\cf6 \strokec6 fade\cf5 \strokec5 )"\cb1 \
+\cb3     \cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3       \cf9 \strokec9 <!-- 
+\f1 \'b2\'d9\'d7\'f7\'ce\'c4\'bc\'fe\'bc\'d0\'bb\'ac\'c8\'eb\'c7\'f8
+\f0  -->\cf5 \cb1 \strokec5 \
+\cb3       \cf2 \strokec2 <\cf4 \strokec4 fadeIn\cf5 \strokec5  \cf6 \strokec6 v-show\cf5 \strokec5 ="\cf6 \strokec6 fade\cf5 \strokec5 .\cf6 \strokec6 folder\cf5 \strokec5 "\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3         \cf2 \strokec2 <\cf4 \strokec4 h3\cf5 \strokec5  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "edit-header"\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3           \cf2 \strokec2 <\cf4 \strokec4 p\cf2 \strokec2 >\cf5 \strokec5 \{\{ \cf6 \strokec6 folder_form\cf5 \strokec5 .\cf6 \strokec6 id\cf5 \strokec5  ? \cf7 \strokec7 '
+\f1 \'b1\'e0\'bc\'ad
+\f0 '\cf5 \strokec5  : \cf7 \strokec7 '
+\f1 \'d0\'c2\'d4\'f6
+\f0 '\cf5 \strokec5  \}\}
+\f1 \'ce\'c4\'bc\'fe\'bc\'d0
+\f0 \cf2 \strokec2 </\cf4 \strokec4 p\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3         \cf2 \strokec2 </\cf4 \strokec4 h3\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3         \cf2 \strokec2 <\cf4 \strokec4 el-scrollbar\cf5 \strokec5  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "scroll"\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3           \cf2 \strokec2 <\cf4 \strokec4 el-form\cf5 \cb1 \strokec5 \
+\cb3             \cf6 \strokec6 size\cf5 \strokec5 =\cf7 \strokec7 "medium"\cf5 \cb1 \strokec5 \
+\cb3             \cf6 \strokec6 ref\cf5 \strokec5 =\cf7 \strokec7 "folder_form"\cf5 \cb1 \strokec5 \
+\cb3             \cf6 \strokec6 label-position\cf5 \strokec5 =\cf7 \strokec7 "top"\cf5 \cb1 \strokec5 \
+\cb3             :\cf6 \strokec6 model\cf5 \strokec5 ="\cf6 \strokec6 folder_form\cf5 \strokec5 "\cb1 \
+\cb3             :\cf6 \strokec6 rules\cf5 \strokec5 ="\cf6 \strokec6 folder_rules\cf5 \strokec5 "\cb1 \
+\cb3             \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "folder_form rule-form"\cf5 \cb1 \strokec5 \
+\cb3             @\cf6 \strokec6 keyup\cf5 \strokec5 .enter.\cf6 \strokec6 native\cf5 \strokec5 ="\cf8 \strokec8 submitFolderFrom\cf5 \strokec5 (\cf7 \strokec7 'folder_form'\cf5 \strokec5 )"\cb1 \
+\cb3           \cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3             \cf2 \strokec2 <\cf4 \strokec4 el-form-item\cf5 \strokec5  \cf6 \strokec6 label\cf5 \strokec5 =\cf7 \strokec7 "
+\f1 \'ce\'c4\'bc\'fe\'c2\'b7\'be\'b6
+\f0 "\cf5 \strokec5  \cf6 \strokec6 prop\cf5 \strokec5 =\cf7 \strokec7 "parentId"\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3               \cf2 \strokec2 <\cf10 \strokec10 WlTreeSelect\cf5 \cb1 \strokec5 \
+\cb3                 \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "u-full"\cf5 \cb1 \strokec5 \
+\cb3                 \cf6 \strokec6 nodeKey\cf5 \strokec5 =\cf7 \strokec7 "id"\cf5 \cb1 \strokec5 \
+\cb3                 \cf6 \strokec6 placeholder\cf5 \strokec5 =\cf7 \strokec7 "
+\f1 \'c7\'eb\'d1\'a1\'d4\'f1\'ce\'c4\'bc\'fe\'c2\'b7\'be\'b6
+\f0 "\cf5 \cb1 \strokec5 \
+\cb3                 :\cf6 \strokec6 props\cf5 \strokec5 ="\cf6 \strokec6 tree_select_prop\cf5 \strokec5 "\cb1 \
+\cb3                 :\cf6 \strokec6 data\cf5 \strokec5 ="\cf6 \strokec6 tree_folder_list\cf5 \strokec5 "\cb1 \
+\cb3                 \cf6 \strokec6 v-model\cf5 \strokec5 ="\cf6 \strokec6 folder_form\cf5 \strokec5 .\cf6 \strokec6 parentId\cf5 \strokec5 "\cb1 \
+\cb3               \cf2 \strokec2 ></\cf10 \strokec10 WlTreeSelect\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3             \cf2 \strokec2 </\cf4 \strokec4 el-form-item\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3             \cf2 \strokec2 <\cf4 \strokec4 el-form-item\cf5 \strokec5  \cf6 \strokec6 label\cf5 \strokec5 =\cf7 \strokec7 "
+\f1 \'ce\'c4\'bc\'fe\'bc\'d0\'c3\'fb\'b3\'c6
+\f0  "\cf5 \strokec5  \cf6 \strokec6 prop\cf5 \strokec5 =\cf7 \strokec7 "name"\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3               \cf2 \strokec2 <\cf4 \strokec4 el-input\cf5 \strokec5  \cf6 \strokec6 v-model\cf5 \strokec5 ="\cf6 \strokec6 folder_form\cf5 \strokec5 .\cf6 \strokec6 name\cf5 \strokec5 " \cf6 \strokec6 placeholder\cf5 \strokec5 =\cf7 \strokec7 "
+\f1 \'c7\'eb\'ca\'e4\'c8\'eb\'ce\'c4\'bc\'fe\'bc\'d0\'c3\'fb\'b3\'c6
+\f0 "\cf2 \strokec2 ></\cf4 \strokec4 el-input\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3             \cf2 \strokec2 </\cf4 \strokec4 el-form-item\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3             \cf2 \strokec2 <\cf4 \strokec4 el-form-item\cf5 \strokec5  \cf6 \strokec6 label\cf5 \strokec5 =\cf7 \strokec7 "
+\f1 \'b1\'b8\'d7\'a2\'cb\'b5\'c3\'f7
+\f0 "\cf5 \strokec5  \cf6 \strokec6 prop\cf5 \strokec5 =\cf7 \strokec7 "describe"\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3               \cf2 \strokec2 <\cf4 \strokec4 el-input\cf5 \cb1 \strokec5 \
+\cb3                 :\cf6 \strokec6 rows\cf5 \strokec5 ="\cf11 \strokec11 3\cf5 \strokec5 "\cb1 \
+\cb3                 \cf6 \strokec6 type\cf5 \strokec5 =\cf7 \strokec7 "textarea"\cf5 \cb1 \strokec5 \
+\cb3                 \cf6 \strokec6 v-model\cf5 \strokec5 ="\cf6 \strokec6 folder_form\cf5 \strokec5 .\cf6 \strokec6 describe\cf5 \strokec5 "\cb1 \
+\cb3                 \cf6 \strokec6 placeholder\cf5 \strokec5 =\cf7 \strokec7 "
+\f1 \'c7\'eb\'ca\'e4\'c8\'eb\'b1\'b8\'d7\'a2\'cb\'b5\'c3\'f7
+\f0 "\cf5 \cb1 \strokec5 \
+\cb3               \cf2 \strokec2 ></\cf4 \strokec4 el-input\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3             \cf2 \strokec2 </\cf4 \strokec4 el-form-item\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3           \cf2 \strokec2 </\cf4 \strokec4 el-form\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3         \cf2 \strokec2 </\cf4 \strokec4 el-scrollbar\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3         \cf2 \strokec2 <\cf4 \strokec4 div\cf5 \strokec5  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "submit-btn-box"\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3           \cf2 \strokec2 <\cf4 \strokec4 submit-btn\cf5 \strokec5  @\cf6 \strokec6 btn\cf5 \strokec5 ="\cf8 \strokec8 submitFolderFrom\cf5 \strokec5 (\cf7 \strokec7 'folder_form'\cf5 \strokec5 )" :\cf6 \strokec6 status\cf5 \strokec5 ="\cf6 \strokec6 load\cf5 \strokec5 .\cf6 \strokec6 folder\cf5 \strokec5 "\cf2 \strokec2 ></\cf4 \strokec4 submit-btn\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3           \cf2 \strokec2 <\cf4 \strokec4 el-button\cf5 \strokec5  \cf6 \strokec6 size\cf5 \strokec5 =\cf7 \strokec7 "medium"\cf5 \strokec5  @\cf6 \strokec6 click\cf5 \strokec5 ="\cf6 \strokec6 fade\cf5 \strokec5 .\cf6 \strokec6 folder\cf5 \strokec5  = \cf4 \strokec4 false\cf5 \strokec5 "\cf2 \strokec2 >
+\f1 \cf5 \strokec5 \'c8\'a1\'cf\'fb
+\f0 \cf2 \strokec2 </\cf4 \strokec4 el-button\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3         \cf2 \strokec2 </\cf4 \strokec4 div\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3       \cf2 \strokec2 </\cf4 \strokec4 fadeIn\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3     \cf2 \strokec2 </\cf4 \strokec4 wlExplorer\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\cb3   \cf2 \strokec2 </\cf4 \strokec4 div\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 \cb3 \strokec2 </\cf4 \strokec4 template\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\
+\cf2 \cb3 \strokec2 <\cf4 \strokec4 script\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf12 \cb3 \strokec12 import\cf5 \strokec5  \cf6 \strokec6 WlExplorer\cf5 \strokec5  \cf12 \strokec12 from\cf5 \strokec5  \cf7 \strokec7 '@/pages/WlExplorer'\cf5 \strokec5  \cf9 \strokec9 // 
+\f1 \'b5\'bc\'c8\'eb\'ce\'c4\'bc\'fe\'b9\'dc\'c0\'ed\'c6\'f7
+\f0 \cf5 \cb1 \strokec5 \
+\cf12 \cb3 \strokec12 import\cf5 \strokec5  \cf6 \strokec6 fadeIn\cf5 \strokec5  \cf12 \strokec12 from\cf5 \strokec5  \cf7 \strokec7 '@/components/fade-in'\cf5 \strokec5  \cf9 \strokec9 // 
+\f1 \'b5\'bc\'c8\'eb\'ce\'c4\'bc\'fe\'b9\'dc\'c0\'ed\'c6\'f7
+\f0 \cf5 \cb1 \strokec5 \
+\cf12 \cb3 \strokec12 import\cf5 \strokec5  \cf6 \strokec6 submitBtn\cf5 \strokec5  \cf12 \strokec12 from\cf5 \strokec5  \cf7 \strokec7 '@/components/submit-btn'\cf5 \strokec5  \cf9 \strokec9 // 
+\f1 \'b5\'bc\'c8\'eb\'b7\'c0\'b6\'b6\'cc\'e1\'bd\'bb\'d7\'e9\'bc\'fe
+\f0 \cf5 \cb1 \strokec5 \
+\cf12 \cb3 \strokec12 import\cf5 \strokec5  \{ \cf6 \strokec6 closeOtherLayout\cf5 \strokec5 , \cf6 \strokec6 arrayToTree\cf5 \strokec5  \} \cf12 \strokec12 from\cf5 \strokec5  \cf7 \strokec7 '@/util'\cf5 \strokec5  \cf9 \strokec9 // 
+\f1 \'b5\'bc\'c8\'eb\'b9\'d8\'b1\'d5\'c6\'e4\'cb\'fb\'b5\'af\'b3\'f6\'c0\'e0\'ca\'d3\'cd\'bc\'ba\'af\'ca\'fd
+\f0 \cf5 \cb1 \strokec5 \
+\cf12 \cb3 \strokec12 import\cf5 \strokec5  \{\cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf5 \cb3   \cf6 \strokec6 getFileListApi\cf5 \strokec5 , \cf9 \strokec9 // 1
+\f1 \'bb\'f1\'c8\'a1\'ce\'c4\'bc\'fe\'bc\'d0\'c1\'d0\'b1\'ed
+\f0 \cf5 \cb1 \strokec5 \
+\cb3   \cf6 \strokec6 getAllFoldersApi\cf5 \strokec5 , \cf9 \strokec9 // 4
+\f1 \'bb\'f1\'c8\'a1\'c8\'ab\'b2\'bf\'ce\'c4\'bc\'fe\'bc\'d0
+\f0 \cf5 \cb1 \strokec5 \
+\cb3   \cf6 \strokec6 delFileApi\cf5 \strokec5  \cf9 \strokec9 // 6
+\f1 \'c9\'be\'b3\'fd\'ce\'c4\'bc\'fe
+\f0 |
+\f1 \'ce\'c4\'bc\'fe\'bc\'d0
+\f0 \cf5 \cb1 \strokec5 \
+\cb3 \} \cf12 \strokec12 from\cf5 \strokec5  \cf7 \strokec7 '@/api'\cf5 \strokec5  \cf9 \strokec9 // 
+\f1 \'b5\'bc\'c8\'eb\'bd\'d3\'bf\'da
+\f0 \cf5 \cb1 \strokec5 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb3 \strokec4 const\cf5 \strokec5  \cf13 \strokec13 apiok\cf5 \strokec5  = \cf11 \strokec11 200\cf5 \cb1 \strokec5 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf12 \cb3 \strokec12 export\cf5 \strokec5  \cf12 \strokec12 default\cf5 \strokec5  \{\cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf5 \cb3   \cf6 \strokec6 name:\cf5 \strokec5  \cf7 \strokec7 'app'\cf5 \strokec5 ,\cb1 \
+\cb3   \cf6 \strokec6 components:\cf5 \strokec5  \{\cb1 \
+\cb3     \cf6 \strokec6 fadeIn\cf5 \strokec5 ,\cb1 \
+\cb3     \cf6 \strokec6 submitBtn\cf5 \strokec5 ,\cb1 \
+\cb3     \cf6 \strokec6 WlExplorer\cf5 \cb1 \strokec5 \
+\cb3   \},\cb1 \
+\cb3   \cf8 \strokec8 data\cf5 \strokec5  () \{\cb1 \
+\cb3     \cf4 \strokec4 const\cf5 \strokec5  \cf6 \strokec6 _GB\cf5 \strokec5  = \cf11 \strokec11 1024\cf5 \strokec5  * \cf11 \strokec11 1024\cf5 \strokec5  * \cf11 \strokec11 1024\cf5 \cb1 \strokec5 \
+\cb3     \cf9 \strokec9 // const vm = this\cf5 \cb1 \strokec5 \
+\cb3     \cf12 \strokec12 return\cf5 \strokec5  \{\cb1 \
+\cb3       \cf6 \strokec6 load:\cf5 \strokec5  \{\cb1 \
+\cb3         \cf6 \strokec6 folder:\cf5 \strokec5  \cf4 \strokec4 false\cf5 \cb1 \strokec5 \
+\cb3       \}, \cf9 \strokec9 // loading
+\f1 \'b9\'dc\'c0\'ed
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \cf6 \strokec6 fade:\cf5 \strokec5  \{\cb1 \
+\cb3         \cf6 \strokec6 folder:\cf5 \strokec5  \cf4 \strokec4 false\cf5 \cb1 \strokec5 \
+\cb3       \}, \cf9 \strokec9 // 
+\f1 \'b5\'af\'b3\'f6\'c0\'e0\'ca\'d3\'cd\'bc\'b9\'dc\'c0\'ed
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \cf6 \strokec6 headerHandle:\cf5 \strokec5  [\{ \cf6 \strokec6 name:\cf5 \strokec5  \cf7 \strokec7 '
+\f1 \'c8\'a8\'cf\'de
+\f0 '\cf5 \strokec5 , \cf6 \strokec6 command:\cf5 \strokec5  \cf7 \strokec7 'auth'\cf5 \strokec5  \}], \cf9 \strokec9 // 
+\f1 \'cd\'b7\'b2\'bf\'b0\'b4\'c5\'a5\'b8\'fc\'b6\'e0\'b2\'d9\'d7\'f7
+\f0 -
+\f1 \'d7\'d4\'b6\'a8\'d2\'e5\'c8\'a8\'cf\'de
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \cf6 \strokec6 file_table_columns:\cf5 \strokec5  [\cb1 \
+\cb3         \{\cb1 \
+\cb3           \cf6 \strokec6 label:\cf5 \strokec5  \cf7 \strokec7 '
+\f1 \'c3\'fb\'b3\'c6
+\f0 '\cf5 \strokec5 ,\cb1 \
+\cb3           \cf6 \strokec6 prop:\cf5 \strokec5  \cf7 \strokec7 'name'\cf5 \strokec5 ,\cb1 \
+\cb3           \cf6 \strokec6 minWidth:\cf5 \strokec5  \cf11 \strokec11 120\cf5 \cb1 \strokec5 \
+\cb3         \},\cb1 \
+\cb3         \{\cb1 \
+\cb3           \cf6 \strokec6 label:\cf5 \strokec5  \cf7 \strokec7 '
+\f1 \'d0\'de\'b8\'c4\'c8\'d5\'c6\'da
+\f0 '\cf5 \strokec5 ,\cb1 \
+\cb3           \cf6 \strokec6 align:\cf5 \strokec5  \cf7 \strokec7 'center'\cf5 \strokec5 ,\cb1 \
+\cb3           \cf6 \strokec6 width:\cf5 \strokec5  \cf11 \strokec11 120\cf5 \strokec5 ,\cb1 \
+\cb3           \cf8 \strokec8 formatter\cf5 \strokec5  (\cf6 \strokec6 row\cf5 \strokec5 ) \{\cb1 \
+\cb3             \cf12 \strokec12 return\cf5 \strokec5  \cf6 \strokec6 row\cf5 \strokec5 .\cf6 \strokec6 editTime\cf5 \strokec5 .\cf8 \strokec8 split\cf5 \strokec5 (\cf7 \strokec7 'T'\cf5 \strokec5 )[\cf11 \strokec11 0\cf5 \strokec5 ] || \cf7 \strokec7 '-'\cf5 \cb1 \strokec5 \
+\cb3           \}\cb1 \
+\cb3         \},\cb1 \
+\cb3         \{\cb1 \
+\cb3           \cf6 \strokec6 label:\cf5 \strokec5  \cf7 \strokec7 '
+\f1 \'c0\'e0\'d0\'cd
+\f0 '\cf5 \strokec5 ,\cb1 \
+\cb3           \cf6 \strokec6 align:\cf5 \strokec5  \cf7 \strokec7 'center'\cf5 \strokec5 ,\cb1 \
+\cb3           \cf6 \strokec6 width:\cf5 \strokec5  \cf11 \strokec11 90\cf5 \strokec5 ,\cb1 \
+\cb3           \cf8 \strokec8 formatter\cf5 \strokec5  (\cf6 \strokec6 row\cf5 \strokec5 ) \{\cb1 \
+\cb3             \cf12 \strokec12 return\cf5 \strokec5  \cf6 \strokec6 row\cf5 \strokec5 .\cf6 \strokec6 type\cf5 \strokec5  === \cf11 \strokec11 1\cf5 \strokec5  ? \cf7 \strokec7 '
+\f1 \'ce\'c4\'bc\'fe\'bc\'d0
+\f0 '\cf5 \strokec5  : \cf6 \strokec6 row\cf5 \strokec5 .\cf6 \strokec6 suffixName\cf5 \cb1 \strokec5 \
+\cb3           \}\cb1 \
+\cb3         \},\cb1 \
+\cb3         \{\cb1 \
+\cb3           \cf6 \strokec6 label:\cf5 \strokec5  \cf7 \strokec7 '
+\f1 \'b4\'f3\'d0\'a1
+\f0 '\cf5 \strokec5 ,\cb1 \
+\cb3           \cf6 \strokec6 minWidth:\cf5 \strokec5  \cf11 \strokec11 90\cf5 \strokec5 ,\cb1 \
+\cb3           \cf6 \strokec6 align:\cf5 \strokec5  \cf7 \strokec7 'center'\cf5 \strokec5 ,\cb1 \
+\cb3           \cf9 \strokec9 // prop : 'size',\cf5 \cb1 \strokec5 \
+\cb3           \cf8 \strokec8 formatter\cf5 \strokec5  (\cf6 \strokec6 row\cf5 \strokec5 ) \{\cb1 \
+\cb3             \cf12 \strokec12 if\cf5 \strokec5  (\cf6 \strokec6 row\cf5 \strokec5 .\cf6 \strokec6 size\cf5 \strokec5  === \cf4 \strokec4 null\cf5 \strokec5 ) \cf12 \strokec12 return\cf5 \strokec5  \cf7 \strokec7 '-'\cf5 \cb1 \strokec5 \
+\cb3             \cf12 \strokec12 if\cf5 \strokec5  (\cf6 \strokec6 row\cf5 \strokec5 .\cf6 \strokec6 size\cf5 \strokec5  < \cf11 \strokec11 1024\cf5 \strokec5 ) \{\cb1 \
+\cb3               \cf9 \strokec9 // 1024
+\f1 \'d2\'d4\'cf\'c2\'cf\'d4\'ca\'be
+\f0 kb\cf5 \cb1 \strokec5 \
+\cb3               \cf12 \strokec12 return\cf5 \strokec5  \cf6 \strokec6 row\cf5 \strokec5 .\cf6 \strokec6 size\cf5 \strokec5  + \cf7 \strokec7 'B'\cf5 \cb1 \strokec5 \
+\cb3             \}\cb1 \
+\cb3             \cf12 \strokec12 if\cf5 \strokec5  (\cf6 \strokec6 row\cf5 \strokec5 .\cf6 \strokec6 size\cf5 \strokec5  < \cf11 \strokec11 1024\cf5 \strokec5  * \cf11 \strokec11 1024\cf5 \strokec5 ) \{\cb1 \
+\cb3               \cf4 \strokec4 let\cf5 \strokec5  \cf6 \strokec6 _kb\cf5 \strokec5  = (\cf6 \strokec6 row\cf5 \strokec5 .\cf6 \strokec6 size\cf5 \strokec5  / \cf11 \strokec11 1024\cf5 \strokec5 ).\cf8 \strokec8 toFixed\cf5 \strokec5 (\cf11 \strokec11 2\cf5 \strokec5 )\cb1 \
+\cb3               \cf12 \strokec12 return\cf5 \strokec5  \cf8 \strokec8 parseFloat\cf5 \strokec5 (\cf6 \strokec6 _kb\cf5 \strokec5 ) + \cf7 \strokec7 'KB'\cf5 \cb1 \strokec5 \
+\cb3             \}\cb1 \
+\cb3             \cf12 \strokec12 if\cf5 \strokec5  (\cf6 \strokec6 row\cf5 \strokec5 .\cf6 \strokec6 size\cf5 \strokec5  < \cf6 \strokec6 _GB\cf5 \strokec5 ) \{\cb1 \
+\cb3               \cf9 \strokec9 // 1024*1024\cf5 \cb1 \strokec5 \
+\cb3               \cf4 \strokec4 let\cf5 \strokec5  \cf6 \strokec6 _mb\cf5 \strokec5  = (\cf6 \strokec6 row\cf5 \strokec5 .\cf6 \strokec6 size\cf5 \strokec5  / \cf11 \strokec11 1024\cf5 \strokec5  / \cf11 \strokec11 1024\cf5 \strokec5 ).\cf8 \strokec8 toFixed\cf5 \strokec5 (\cf11 \strokec11 2\cf5 \strokec5 )\cb1 \
+\cb3               \cf12 \strokec12 return\cf5 \strokec5  \cf8 \strokec8 parseFloat\cf5 \strokec5 (\cf6 \strokec6 _mb\cf5 \strokec5 ) + \cf7 \strokec7 'MB'\cf5 \cb1 \strokec5 \
+\cb3             \}\cb1 \
+\cb3             \cf4 \strokec4 let\cf5 \strokec5  \cf6 \strokec6 _gb\cf5 \strokec5  = (\cf6 \strokec6 row\cf5 \strokec5 .\cf6 \strokec6 size\cf5 \strokec5  / \cf6 \strokec6 _GB\cf5 \strokec5 ).\cf8 \strokec8 toFixed\cf5 \strokec5 (\cf11 \strokec11 2\cf5 \strokec5 )\cb1 \
+\cb3             \cf12 \strokec12 return\cf5 \strokec5  \cf8 \strokec8 parseFloat\cf5 \strokec5 (\cf6 \strokec6 _gb\cf5 \strokec5 ) + \cf7 \strokec7 'GB'\cf5 \cb1 \strokec5 \
+\cb3           \}\cb1 \
+\cb3         \},\cb1 \
+\cb3         \{\cb1 \
+\cb3           \cf6 \strokec6 label:\cf5 \strokec5  \cf7 \strokec7 '
+\f1 \'b4\'b4\'bd\'a8\'c8\'d5\'c6\'da
+\f0 '\cf5 \strokec5 ,\cb1 \
+\cb3           \cf6 \strokec6 align:\cf5 \strokec5  \cf7 \strokec7 'center'\cf5 \strokec5 ,\cb1 \
+\cb3           \cf6 \strokec6 width:\cf5 \strokec5  \cf11 \strokec11 120\cf5 \strokec5 ,\cb1 \
+\cb3           \cf8 \strokec8 formatter\cf5 \strokec5  (\cf6 \strokec6 row\cf5 \strokec5 ) \{\cb1 \
+\cb3             \cf12 \strokec12 return\cf5 \strokec5  \cf6 \strokec6 row\cf5 \strokec5 .\cf6 \strokec6 createTime\cf5 \strokec5 .\cf8 \strokec8 split\cf5 \strokec5 (\cf7 \strokec7 'T'\cf5 \strokec5 )[\cf11 \strokec11 0\cf5 \strokec5 ] || \cf7 \strokec7 '-'\cf5 \cb1 \strokec5 \
+\cb3           \}\cb1 \
+\cb3         \},\cb1 \
+\cb3         \{\cb1 \
+\cb3           \cf6 \strokec6 label:\cf5 \strokec5  \cf7 \strokec7 '
+\f1 \'d7\'f7\'d5\'df
+\f0 '\cf5 \strokec5 ,\cb1 \
+\cb3           \cf6 \strokec6 minWidth:\cf5 \strokec5  \cf11 \strokec11 100\cf5 \strokec5 ,\cb1 \
+\cb3           \cf6 \strokec6 align:\cf5 \strokec5  \cf7 \strokec7 'center'\cf5 \strokec5 ,\cb1 \
+\cb3           \cf8 \strokec8 formatter\cf5 \strokec5  (\cf6 \strokec6 row\cf5 \strokec5 ) \{\cb1 \
+\cb3             \cf12 \strokec12 return\cf5 \strokec5  \cf6 \strokec6 row\cf5 \strokec5 .\cf6 \strokec6 createUserName\cf5 \strokec5  || \cf7 \strokec7 '-'\cf5 \cb1 \strokec5 \
+\cb3           \}\cb1 \
+\cb3         \},\cb1 \
+\cb3         \{\cb1 \
+\cb3           \cf6 \strokec6 label:\cf5 \strokec5  \cf7 \strokec7 '
+\f1 \'c3\'e8\'ca\'f6
+\f0 '\cf5 \strokec5 ,\cb1 \
+\cb3           \cf6 \strokec6 minWidth:\cf5 \strokec5  \cf11 \strokec11 100\cf5 \strokec5 ,\cb1 \
+\cb3           \cf8 \strokec8 formatter\cf5 \strokec5  (\cf6 \strokec6 row\cf5 \strokec5 ) \{\cb1 \
+\cb3             \cf12 \strokec12 return\cf5 \strokec5  \cf6 \strokec6 row\cf5 \strokec5 .\cf6 \strokec6 describe\cf5 \strokec5  || \cf7 \strokec7 '-'\cf5 \cb1 \strokec5 \
+\cb3           \}\cb1 \
+\cb3         \}\cb1 \
+\cb3       ], \cf9 \strokec9 // 
+\f1 \'d7\'d4\'b6\'a8\'d2\'e5\'b1\'ed\'b8\'f1\'c1\'d0
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \cf6 \strokec6 file_table_data:\cf5 \strokec5  [], \cf9 \strokec9 // 
+\f1 \'b1\'ed\'b8\'f1\'ca\'fd\'be\'dd
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \cf6 \strokec6 all_folder_list:\cf5 \strokec5  [], \cf9 \strokec9 // 
+\f1 \'cb\'f9\'d3\'d0\'ce\'c4\'bc\'fe\'bc\'d0\'c1\'d0\'b1\'ed
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \cf6 \strokec6 tree_folder_list:\cf5 \strokec5  [], \cf9 \strokec9 // 
+\f1 \'ca\'f7\'d0\'ce\'ce\'c4\'bc\'fe\'bc\'d0\'c1\'d0\'b1\'ed
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \cf6 \strokec6 type:\cf5 \strokec5  \{\cb1 \
+\cb3         \cf6 \strokec6 folder:\cf5 \strokec5  \cf11 \strokec11 1\cf5 \strokec5 ,\cb1 \
+\cb3         \cf6 \strokec6 img:\cf5 \strokec5  \cf11 \strokec11 2\cf5 \strokec5 ,\cb1 \
+\cb3         \cf6 \strokec6 video:\cf5 \strokec5  \cf11 \strokec11 3\cf5 \strokec5 ,\cb1 \
+\cb3         \cf6 \strokec6 other:\cf5 \strokec5  \cf11 \strokec11 4\cf5 \cb1 \strokec5 \
+\cb3       \}, \cf9 \strokec9 // 
+\f1 \'ce\'c4\'bc\'fe\'c0\'e0\'d0\'cd
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \cf6 \strokec6 rource_type:\cf5 \strokec5  \{\cb1 \
+\cb3         \cf6 \strokec6 self:\cf5 \strokec5  \cf11 \strokec11 1\cf5 \strokec5  \cf9 \strokec9 // 
+\f1 \'d7\'d4\'bd\'a8
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \}, \cf9 \strokec9 // 
+\f1 \'ca\'fd\'be\'dd\'c0\'b4\'d4\'b4\'c0\'e0\'d0\'cd
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \cf6 \strokec6 explorer_prop:\cf5 \strokec5  \{\cb1 \
+\cb3         \cf6 \strokec6 name:\cf5 \strokec5  \cf7 \strokec7 'name'\cf5 \strokec5 ,\cb1 \
+\cb3         \cf6 \strokec6 match:\cf5 \strokec5  \cf7 \strokec7 'name'\cf5 \strokec5 ,\cb1 \
+\cb3         \cf6 \strokec6 splic:\cf5 \strokec5  \cf4 \strokec4 true\cf5 \strokec5 ,\cb1 \
+\cb3         \cf6 \strokec6 suffix:\cf5 \strokec5  \cf7 \strokec7 'suffixName'\cf5 \strokec5 ,\cb1 \
+\cb3         \cf6 \strokec6 pathId:\cf5 \strokec5  \cf7 \strokec7 'id'\cf5 \strokec5 ,\cb1 \
+\cb3         \cf6 \strokec6 pathPid:\cf5 \strokec5  \cf7 \strokec7 'parentId'\cf5 \strokec5 ,\cb1 \
+\cb3         \cf6 \strokec6 pathName:\cf5 \strokec5  \cf7 \strokec7 'name'\cf5 \strokec5 ,\cb1 \
+\cb3         \cf6 \strokec6 pathChildren:\cf5 \strokec5  \cf7 \strokec7 'children'\cf5 \strokec5 , \cf9 \strokec9 // String 
+\f1 \'c2\'b7\'be\'b6\'ca\'fd\'be\'dd
+\f0  children
+\f1 \'d7\'d6\'b6\'ce
+\f0 \cf5 \cb1 \strokec5 \
+\cb3         \cf6 \strokec6 pathConnector:\cf5 \strokec5  \cf7 \strokec7 '\cf14 \strokec14 \\\\\cf7 \strokec7 '\cf5 \strokec5 , \cf9 \strokec9 // String 
+\f1 \'c2\'b7\'be\'b6\'b8\'b8\'d7\'d3\'ca\'fd\'be\'dd\'c6\'b4\'bd\'d3\'c1\'ac\'bd\'d3\'b7\'fb
+\f0 ,
+\f1 \'c4\'ac\'c8\'cf\'ce\'aa
+\f0 '\\'\cf5 \cb1 \strokec5 \
+\cb3         \cf6 \strokec6 pathParents:\cf5 \strokec5  \cf7 \strokec7 'parents'\cf5 \strokec5 , \cf9 \strokec9 // String 
+\f1 \'c2\'b7\'be\'b6\'ca\'fd\'be\'dd\'cb\'f9\'d3\'d0\'d6\'b1\'cf\'b5\'d7\'e6\'cf\'c8\'bd\'da\'b5\'e3\'d7\'d4\'d4\'f6\'b3\'a4
+\f0 identityId
+\f1 \'b6\'ba\'ba\'c5\'c6\'b4\'bd\'d3
+\f0 \cf5 \cb1 \strokec5 \
+\cb3         \cf6 \strokec6 pathIdentityId:\cf5 \strokec5  \cf7 \strokec7 'identityId'\cf5 \strokec5  \cf9 \strokec9 // String 
+\f1 \'c2\'b7\'be\'b6\'ca\'fd\'be\'dd\'d7\'d4\'d4\'f6\'b3\'a4
+\f0 id\cf5 \cb1 \strokec5 \
+\cb3       \}, \cf9 \strokec9 // 
+\f1 \'ce\'c4\'bc\'fe\'b9\'dc\'c0\'ed\'c6\'f7\'c5\'e4\'d6\'c3\'cf\'ee
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \cf6 \strokec6 path:\cf5 \strokec5  \{\}, \cf9 \strokec9 // 
+\f1 \'c2\'b7\'be\'b6\'ca\'fd\'be\'dd
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \cf6 \strokec6 folder_form:\cf5 \strokec5  \{\cb1 \
+\cb3         \cf6 \strokec6 parentId:\cf5 \strokec5  \cf7 \strokec7 ''\cf5 \strokec5 ,\cb1 \
+\cb3         \cf6 \strokec6 name:\cf5 \strokec5  \cf7 \strokec7 ''\cf5 \strokec5 ,\cb1 \
+\cb3         \cf6 \strokec6 preview:\cf5 \strokec5  [],\cb1 \
+\cb3         \cf6 \strokec6 handle:\cf5 \strokec5  [],\cb1 \
+\cb3         \cf6 \strokec6 describe:\cf5 \strokec5  \cf7 \strokec7 ''\cf5 \cb1 \strokec5 \
+\cb3       \}, \cf9 \strokec9 // 
+\f1 \'ce\'c4\'bc\'fe\'bc\'d0\'b1\'ed\'b5\'a5
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \cf6 \strokec6 folder_rules:\cf5 \strokec5  \{\cb1 \
+\cb3         \cf6 \strokec6 parentId:\cf5 \strokec5  [\cb1 \
+\cb3           \{ \cf6 \strokec6 required:\cf5 \strokec5  \cf4 \strokec4 true\cf5 \strokec5 , \cf6 \strokec6 message:\cf5 \strokec5  \cf7 \strokec7 '
+\f1 \'c7\'eb\'d1\'a1\'d4\'f1\'ce\'c4\'bc\'fe\'c2\'b7\'be\'b6
+\f0 '\cf5 \strokec5 , \cf6 \strokec6 trigger:\cf5 \strokec5  \cf7 \strokec7 'blur'\cf5 \strokec5  \}\cb1 \
+\cb3         ],\cb1 \
+\cb3         \cf6 \strokec6 name:\cf5 \strokec5  [\cb1 \
+\cb3           \{ \cf6 \strokec6 required:\cf5 \strokec5  \cf4 \strokec4 true\cf5 \strokec5 , \cf6 \strokec6 message:\cf5 \strokec5  \cf7 \strokec7 '
+\f1 \'c7\'eb\'cc\'ee\'d0\'b4\'ce\'c4\'bc\'fe\'bc\'d0\'c3\'fb\'b3\'c6
+\f0 '\cf5 \strokec5 , \cf6 \strokec6 trigger:\cf5 \strokec5  \cf7 \strokec7 'blur'\cf5 \strokec5  \}\cb1 \
+\cb3         ]\cb1 \
+\cb3       \}, \cf9 \strokec9 // 
+\f1 \'ce\'c4\'bc\'fe\'bc\'d0\'b1\'ed\'b5\'a5\'d1\'e9\'d6\'a4
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \cf6 \strokec6 child_act_saved:\cf5 \strokec5  \{\}, \cf9 \strokec9 // 
+\f1 \'b4\'e6\'b4\'a2\'d7\'d3\'d7\'e9\'bc\'fe\'ca\'fd\'be\'dd\'a3\'ac\'d3\'c3\'d3\'da\'b1\'e0\'bc\'ad\'b8\'fc\'d0\'c2
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \cf6 \strokec6 tree_select_prop:\cf5 \strokec5  \{\cb1 \
+\cb3         \cf6 \strokec6 label:\cf5 \strokec5  \cf7 \strokec7 'name'\cf5 \strokec5 ,\cb1 \
+\cb3         \cf6 \strokec6 children:\cf5 \strokec5  \cf7 \strokec7 'children'\cf5 \cb1 \strokec5 \
+\cb3       \}, \cf9 \strokec9 // 
+\f1 \'ca\'f7\'d0\'ce\'cf\'c2\'c0\'ad\'bf\'f2\'c5\'e4\'d6\'c3\'cf\'ee
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \cf6 \strokec6 uploadOptions:\cf5 \strokec5  \{\cb1 \
+\cb3         \cf6 \strokec6 aa:\cf5 \strokec5  \cf11 \strokec11 1212\cf5 \cb1 \strokec5 \
+\cb3       \} \cf9 \strokec9 // 
+\f1 \'c9\'cf\'b4\'ab\'ce\'c4\'bc\'fe\'b8\'bd\'bc\'d3\'b2\'ce\'ca\'fd
+\f0 \cf5 \cb1 \strokec5 \
+\cb3     \}\cb1 \
+\cb3   \},\cb1 \
+\cb3   \cf6 \strokec6 methods:\cf5 \strokec5  \{\cb1 \
+\cb3     \cf9 \strokec9 /**\cf5 \cb1 \strokec5 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9 \cb3 \strokec9      * \cf4 \strokec4 @name\cf9 \strokec9  
+\f1 \cf10 \strokec10 \'c9\'cf\'b4\'ab\'ce\'c4\'bc\'fe\'cc\'e1\'bd\'bb\'b2\'d9\'d7\'f7
+\f0 \cf5 \cb1 \strokec5 \
+\cf9 \cb3 \strokec9      */\cf5 \cb1 \strokec5 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf5 \cb3     \cf8 \strokec8 fileUpload\cf5 \strokec5  (\cf6 \strokec6 file\cf5 \strokec5 , \cf6 \strokec6 cb\cf5 \strokec5 ) \{\cb1 \
+\cb3       \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 uploadOptions\cf5 \strokec5 .\cf6 \strokec6 bb\cf5 \strokec5  = \cf11 \strokec11 1\cf5 \cb1 \strokec5 \
+\cb3       \cf8 \strokec8 cb\cf5 \strokec5 ()\cb1 \
+\cb3     \},\cb1 \
+\cb3     \cf8 \strokec8 download\cf5 \strokec5  (\cf6 \strokec6 data\cf5 \strokec5 , \cf6 \strokec6 func\cf5 \strokec5 ) \{\cb1 \
+\cb3       \cf6 \strokec6 console\cf5 \strokec5 .\cf8 \strokec8 log\cf5 \strokec5 (\cf6 \strokec6 data\cf5 \strokec5 , \cf6 \strokec6 func\cf5 \strokec5 )\cb1 \
+\cb3     \},\cb1 \
+\cb3     \cf9 \strokec9 /**\cf5 \cb1 \strokec5 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9 \cb3 \strokec9      * 
+\f1 \'b8\'f9\'be\'dd\'b9\'d8\'bc\'fc\'b4\'ca\'cb\'d1\'cb\'f7\'ce\'c4\'bc\'fe
+\f0 \cf5 \cb1 \strokec5 \
+\cf9 \cb3 \strokec9      * file: Object 
+\f1 \'ce\'c4\'bc\'fe\'ca\'f4\'d0\'d4
+\f0 \cf5 \cb1 \strokec5 \
+\cf9 \cb3 \strokec9      * update: Boolean 
+\f1 \'ca\'fd\'be\'dd\'ca\'c7\'b7\'f1\'d0\'e8\'d2\'aa\'b8\'fc\'d0\'c2\'a3\'a8\'b2\'bb\'d0\'e8\'d2\'aa\'b1\'ed\'ca\'be\'d2\'d1\'b4\'e6\'d4\'da\'a3\'a9
+\f0 \cf5 \cb1 \strokec5 \
+\cf9 \cb3 \strokec9      */\cf5 \cb1 \strokec5 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf5 \cb3     \cf8 \strokec8 fileSearch\cf5 \strokec5  (\cf6 \strokec6 file\cf5 \strokec5 , \cf6 \strokec6 update\cf5 \strokec5 ) \{\cb1 \
+\cb3       \cf12 \strokec12 if\cf5 \strokec5  (\cf6 \strokec6 update\cf5 \strokec5 ) \{\cb1 \
+\cb3         \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 path\cf5 \strokec5  = \cf6 \strokec6 file\cf5 \cb1 \strokec5 \
+\cb3         \cf9 \strokec9 // this.getFileList()\cf5 \cb1 \strokec5 \
+\cb3         \cf9 \strokec9 // 
+\f1 \'ca\'b5\'cf\'d6\'b4\'d3
+\f0 all_folder_list
+\f1 \'d6\'d0\'d5\'d2\'b5\'bd\'cf\'c2\'d2\'bb\'b2\'e3\'ce\'c4\'bc\'fe\'bc\'d0\'bc\'b0\'ce\'c4\'bc\'fe
+\f0 \cf5 \cb1 \strokec5 \
+\cb3         \cf4 \strokec4 this\cf5 \strokec5 .\cf8 \strokec8 getLowerFile\cf5 \strokec5 ()\cb1 \
+\cb3       \}\cb1 \
+\cb3     \},\cb1 \
+\cb3     \cf9 \strokec9 // 
+\f1 \'bb\'f1\'c8\'a1\'cf\'c2\'d2\'bb\'b2\'e3\'ce\'c4\'bc\'fe\'bc\'d0\'bc\'b0\'ce\'c4\'bc\'fe
+\f0 \cf5 \cb1 \strokec5 \
+\cb3     \cf8 \strokec8 getLowerFile\cf5 \strokec5  () \{\cb1 \
+\cb3       \cf9 \strokec9 // console.log(this.all_folder_list)\cf5 \cb1 \strokec5 \
+\cb3       \cf9 \strokec9 // console.log(this.path)\cf5 \cb1 \strokec5 \
+\cb3       \cf9 \strokec9 // console.log(this.path.id)\cf5 \cb1 \strokec5 \
+\cb3       \cf12 \strokec12 for\cf5 \strokec5  (\cf4 \strokec4 let\cf5 \strokec5  \cf6 \strokec6 i\cf5 \strokec5  = \cf11 \strokec11 0\cf5 \strokec5 ; \cf6 \strokec6 i\cf5 \strokec5  < \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 all_folder_list\cf5 \strokec5 .\cf6 \strokec6 length\cf5 \strokec5 ; \cf6 \strokec6 i\cf5 \strokec5 ++) \{\cb1 \
+\cb3         \cf12 \strokec12 if\cf5 \strokec5  (\cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 all_folder_list\cf5 \strokec5 [\cf6 \strokec6 i\cf5 \strokec5 ].\cf6 \strokec6 id\cf5 \strokec5  === \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 path\cf5 \strokec5 .\cf6 \strokec6 id\cf5 \strokec5 ) \{\cb1 \
+\cb3           \cf9 \strokec9 // console.log(this.all_folder_list[i].Id)\cf5 \cb1 \strokec5 \
+\cb3           \cf9 \strokec9 // console.log(this.path.id)\cf5 \cb1 \strokec5 \
+\cb3           \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 file_table_data\cf5 \strokec5  = \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 all_folder_list\cf5 \strokec5 [\cf6 \strokec6 i\cf5 \strokec5 ].\cf6 \strokec6 children\cf5 \cb1 \strokec5 \
+\cb3         \}\cb1 \
+\cb3       \}\cb1 \
+\cb3     \},\cb1 \
+\cb3     \cf9 \strokec9 // 
+\f1 \'bb\'f1\'c8\'a1\'ce\'c4\'bc\'fe\'bc\'d0\'c1\'d0\'b1\'ed
+\f0 \cf5 \cb1 \strokec5 \
+\cb3     \cf8 \strokec8 getFileList\cf5 \strokec5  () \{\cb1 \
+\cb3       \cf8 \strokec8 getFileListApi\cf5 \strokec5 ().\cf8 \strokec8 then\cf5 \strokec5 ((\{ \cf6 \strokec6 data\cf5 \strokec5  \}) \cf4 \strokec4 =>\cf5 \strokec5  \{\cb1 \
+\cb3         \cf12 \strokec12 if\cf5 \strokec5  (\cf6 \strokec6 data\cf5 \strokec5 .\cf6 \strokec6 StatusCode\cf5 \strokec5  === \cf13 \strokec13 apiok\cf5 \strokec5 ) \{\cb1 \
+\cb3           \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 file_table_data\cf5 \strokec5  = \cf6 \strokec6 data\cf5 \strokec5 .\cf6 \strokec6 Data\cf5 \strokec5  || []\cb1 \
+\cb3         \}\cb1 \
+\cb3       \})\cb1 \
+\cb3     \},\cb1 \
+\cb3     \cf9 \strokec9 /**\cf5 \cb1 \strokec5 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9 \cb3 \strokec9      * 
+\f1 \'b1\'e0\'bc\'ad\'ce\'c4\'bc\'fe\'bc\'d0
+\f0 \cf5 \cb1 \strokec5 \
+\cf9 \cb3 \strokec9      * act:Object 
+\f1 \'b5\'b1\'c7\'b0\'d1\'a1\'d6\'d0\'ce\'c4\'bc\'fe\'bc\'d0
+\f0 \cf5 \cb1 \strokec5 \
+\cf9 \cb3 \strokec9      * type:String 
+\f1 \'b2\'d9\'d7\'f7\'c0\'e0\'d0\'cd
+\f0  add
+\f1 \'cc\'ed\'bc\'d3
+\f0 edit
+\f1 \'b1\'e0\'bc\'ad
+\f0 \cf5 \cb1 \strokec5 \
+\cf9 \cb3 \strokec9      * file:Object 
+\f1 \'b5\'b1\'c7\'b0\'c2\'b7\'be\'b6\'d0\'c5\'cf\'a2
+\f0 \cf5 \cb1 \strokec5 \
+\cf9 \cb3 \strokec9      */\cf5 \cb1 \strokec5 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf5 \cb3     \cf8 \strokec8 handleFolder\cf5 \strokec5  (\cf6 \strokec6 act\cf5 \strokec5 , \cf6 \strokec6 type\cf5 \strokec5 , \cf6 \strokec6 file\cf5 \strokec5 ) \{\cb1 \
+\cb3       \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 path\cf5 \strokec5  = \cf6 \strokec6 file\cf5 \cb1 \strokec5 \
+\cb3       \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 fade\cf5 \strokec5 .\cf6 \strokec6 folder\cf5 \strokec5  = \cf4 \strokec4 true\cf5 \cb1 \strokec5 \
+\cb3       \cf12 \strokec12 if\cf5 \strokec5  (\cf6 \strokec6 type\cf5 \strokec5  === \cf7 \strokec7 'add'\cf5 \strokec5 ) \{\cb1 \
+\cb3         \cf4 \strokec4 this\cf5 \strokec5 .\cf13 \strokec13 $refs\cf5 \strokec5 [\cf7 \strokec7 'folder_form'\cf5 \strokec5 ].\cf8 \strokec8 resetFields\cf5 \strokec5 ()\cb1 \
+\cb3         \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 folder_form\cf5 \strokec5 .\cf6 \strokec6 id\cf5 \strokec5  = \cf7 \strokec7 ''\cf5 \cb1 \strokec5 \
+\cb3         \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 folder_form\cf5 \strokec5 .\cf6 \strokec6 parentId\cf5 \strokec5  = \cf6 \strokec6 file\cf5 \strokec5 .\cf6 \strokec6 id\cf5 \cb1 \strokec5 \
+\cb3         \cf12 \strokec12 return\cf5 \cb1 \strokec5 \
+\cb3       \}\cb1 \
+\cb3       \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 child_act_saved\cf5 \strokec5  = \cf6 \strokec6 act\cf5 \cb1 \strokec5 \
+\cb3       \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 folder_form\cf5 \strokec5  = \{ ...\cf6 \strokec6 act\cf5 \strokec5  \}\cb1 \
+\cb3     \},\cb1 \
+\cb3     \cf9 \strokec9 // 
+\f1 \'d0\'c2\'d4\'f6\'ce\'c4\'bc\'fe\'bc\'d0
+\f0 \cf5 \cb1 \strokec5 \
+\cb3     \cf8 \strokec8 submitFolderFrom\cf5 \strokec5  (\cf6 \strokec6 formName\cf5 \strokec5 ) \{\cb1 \
+\cb3       \cf4 \strokec4 this\cf5 \strokec5 .\cf13 \strokec13 $refs\cf5 \strokec5 [\cf6 \strokec6 formName\cf5 \strokec5 ].\cf8 \strokec8 validate\cf5 \strokec5 ((\cf6 \strokec6 valid\cf5 \strokec5 ) \cf4 \strokec4 =>\cf5 \strokec5  \{\cb1 \
+\cb3         \cf12 \strokec12 if\cf5 \strokec5  (\cf6 \strokec6 valid\cf5 \strokec5 ) \{\cb1 \
+\cb3           \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 load\cf5 \strokec5 .\cf6 \strokec6 folder\cf5 \strokec5  = \cf4 \strokec4 true\cf5 \cb1 \strokec5 \
+\cb3           \cf8 \strokec8 setTimeout\cf5 \strokec5 (() \cf4 \strokec4 =>\cf5 \strokec5  \{\cb1 \
+\cb3             \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 load\cf5 \strokec5 .\cf6 \strokec6 folder\cf5 \strokec5  = \cf4 \strokec4 false\cf5 \cb1 \strokec5 \
+\cb3             \cf9 \strokec9 // let res_data = data.Data\cf5 \cb1 \strokec5 \
+\cb3             \cf4 \strokec4 let\cf5 \strokec5  \cf6 \strokec6 res_data\cf5 \strokec5  = \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 folder_form\cf5 \strokec5  \cf9 \strokec9 // 
+\f1 \'d3\'c9\'b1\'ed\'b5\'a5\'ca\'fd\'be\'dd\'c4\'a3\'c4\'e2\'b7\'fe\'ce\'f1\'c6\'f7\'b7\'b5\'bb\'d8\'ca\'fd\'be\'dd\'a3\'ac\'b4\'cb\'b4\'a6\'d3\'a6\'d3\'d0\'b7\'fe\'ce\'f1\'c6\'f7\'b7\'b5\'bb\'d8\'b6\'d4\'d3\'a6\'ca\'b5\'cc\'e5
+\f0 \cf5 \cb1 \strokec5 \
+\cb3             \cf6 \strokec6 res_data\cf5 \strokec5 .\cf6 \strokec6 EditTime\cf5 \strokec5  = \cf6 \strokec6 res_data\cf5 \strokec5 .\cf6 \strokec6 CreateTime\cf5 \strokec5  = \cf7 \strokec7 '2019-11-11T11:11:11'\cf5 \cb1 \strokec5 \
+\cb3             \cf6 \strokec6 res_data\cf5 \strokec5 .\cf6 \strokec6 Type\cf5 \strokec5  = \cf11 \strokec11 1\cf5 \cb1 \strokec5 \
+\cb3             \cf12 \strokec12 if\cf5 \strokec5  (!\cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 folder_form\cf5 \strokec5 .\cf6 \strokec6 Id\cf5 \strokec5 ) \{\cb1 \
+\cb3               \cf9 \strokec9 // 
+\f1 \'d0\'c2\'d4\'f6
+\f0 \cf5 \cb1 \strokec5 \
+\cb3               \cf12 \strokec12 if\cf5 \strokec5  (\cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 folder_form\cf5 \strokec5 .\cf6 \strokec6 ParentId\cf5 \strokec5  === \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 path\cf5 \strokec5 .\cf6 \strokec6 id\cf5 \strokec5 ) \{\cb1 \
+\cb3                 \cf9 \strokec9 // 
+\f1 \'d0\'c2\'d4\'f6\'b5\'bd\'b5\'b1\'c7\'b0\'c2\'b7\'be\'b6
+\f0 \cf5 \cb1 \strokec5 \
+\cb3                 \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 file_table_data\cf5 \strokec5 .\cf8 \strokec8 unshift\cf5 \strokec5 (\cf6 \strokec6 res_data\cf5 \strokec5 )\cb1 \
+\cb3               \} \cf12 \strokec12 else\cf5 \strokec5  \{\cb1 \
+\cb3                 \cf9 \strokec9 // 
+\f1 \'d0\'c2\'d4\'f6\'c6\'e4\'cb\'fb\'c2\'b7\'be\'b6
+\f0 \cf5 \cb1 \strokec5 \
+\cb3                 \cf4 \strokec4 let\cf5 \strokec5  \cf6 \strokec6 _new_data\cf5 \strokec5  = \{\cb1 \
+\cb3                   \cf6 \strokec6 id:\cf5 \strokec5  \cf6 \strokec6 res_data\cf5 \strokec5 .\cf6 \strokec6 Id\cf5 \strokec5 ,\cb1 \
+\cb3                   \cf6 \strokec6 pid:\cf5 \strokec5  \cf6 \strokec6 res_data\cf5 \strokec5 .\cf6 \strokec6 ParentId\cf5 \strokec5 ,\cb1 \
+\cb3                   \cf6 \strokec6 path:\cf5 \strokec5  \cf6 \strokec6 res_data\cf5 \strokec5 .\cf6 \strokec6 Name\cf5 \cb1 \strokec5 \
+\cb3                 \}\cb1 \
+\cb3                 \cf4 \strokec4 this\cf5 \strokec5 .\cf13 \strokec13 $refs\cf5 \strokec5 [\cf7 \strokec7 'wl-explorer-cpt'\cf5 \strokec5 ].\cf8 \strokec8 updateHistoryData\cf5 \strokec5 (\cb1 \
+\cb3                   \{ \cf6 \strokec6 Id:\cf5 \strokec5  \cf6 \strokec6 res_data\cf5 \strokec5 .\cf6 \strokec6 ParentId\cf5 \strokec5  \},\cb1 \
+\cb3                   [\cf6 \strokec6 _new_data\cf5 \strokec5 ]\cb1 \
+\cb3                 )\cb1 \
+\cb3               \}\cb1 \
+\cb3             \} \cf12 \strokec12 else\cf5 \strokec5  \{\cb1 \
+\cb3               \cf9 \strokec9 // 
+\f1 \'b1\'e0\'bc\'ad
+\f0 \cf5 \cb1 \strokec5 \
+\cb3               \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 child_act_saved\cf5 \strokec5 .\cf6 \strokec6 Name\cf5 \strokec5  = \cf6 \strokec6 res_data\cf5 \strokec5 .\cf6 \strokec6 Name\cf5 \cb1 \strokec5 \
+\cb3               \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 child_act_saved\cf5 \strokec5 .\cf6 \strokec6 Describe\cf5 \strokec5  = \cf6 \strokec6 res_data\cf5 \strokec5 .\cf6 \strokec6 Describe\cf5 \cb1 \strokec5 \
+\cb3             \}\cb1 \
+\cb3             \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 fade\cf5 \strokec5 .\cf6 \strokec6 folder\cf5 \strokec5  = \cf4 \strokec4 false\cf5 \cb1 \strokec5 \
+\cb3             \cf4 \strokec4 this\cf5 \strokec5 .\cf8 \strokec8 $message\cf5 \strokec5 (\{\cb1 \
+\cb3               \cf6 \strokec6 showClose:\cf5 \strokec5  \cf4 \strokec4 true\cf5 \strokec5 ,\cb1 \
+\cb3               \cf6 \strokec6 message:\cf5 \strokec5  \cf7 \strokec7 '
+\f1 \'b2\'d9\'d7\'f7\'b3\'c9\'b9\'a6
+\f0 '\cf5 \strokec5 ,\cb1 \
+\cb3               \cf6 \strokec6 type:\cf5 \strokec5  \cf7 \strokec7 'success'\cf5 \cb1 \strokec5 \
+\cb3             \})\cb1 \
+\cb3           \}, \cf11 \strokec11 1000\cf5 \strokec5 )\cb1 \
+\cb3         \} \cf12 \strokec12 else\cf5 \strokec5  \{\cb1 \
+\cb3           \cf12 \strokec12 return\cf5 \strokec5  \cf4 \strokec4 false\cf5 \cb1 \strokec5 \
+\cb3         \}\cb1 \
+\cb3       \})\cb1 \
+\cb3     \},\cb1 \
+\cb3     \cf9 \strokec9 // 
+\f1 \'c9\'be\'b3\'fd\'ce\'c4\'bc\'fe
+\f0 \cf5 \cb1 \strokec5 \
+\cb3     \cf8 \strokec8 fileDel\cf5 \strokec5  (\cf6 \strokec6 data\cf5 \strokec5 ) \{\cb1 \
+\cb3       \cf4 \strokec4 let\cf5 \strokec5  \cf6 \strokec6 cannot_del_data\cf5 \strokec5  = [] \cf9 \strokec9 // 
+\f1 \'ca\'d5\'bc\'af\'b2\'bb\'bf\'c9\'c9\'be\'b3\'fd\'ca\'fd\'be\'dd
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \cf4 \strokec4 let\cf5 \strokec5  \cf6 \strokec6 normal_data_file\cf5 \strokec5  = [] \cf9 \strokec9 // 
+\f1 \'ca\'d5\'bc\'af\'bf\'c9\'c9\'be\'b3\'fd\'ce\'c4\'bc\'fe
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \cf4 \strokec4 let\cf5 \strokec5  \cf6 \strokec6 normal_data_folder\cf5 \strokec5  = [] \cf9 \strokec9 // 
+\f1 \'ca\'d5\'bc\'af\'bf\'c9\'c9\'be\'b3\'fd\'ce\'c4\'bc\'fe\'bc\'d0
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \cf6 \strokec6 data\cf5 \strokec5 .\cf8 \strokec8 forEach\cf5 \strokec5 ((\cf6 \strokec6 i\cf5 \strokec5 ) \cf4 \strokec4 =>\cf5 \strokec5  \{\cb1 \
+\cb3         \cf6 \strokec6 i\cf5 \strokec5 .\cf6 \strokec6 RourceType\cf5 \strokec5  !== \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 rource_type\cf5 \strokec5 .\cf6 \strokec6 self\cf5 \cb1 \strokec5 \
+\cb3           ? \cf6 \strokec6 cannot_del_data\cf5 \strokec5 .\cf8 \strokec8 push\cf5 \strokec5 (\cf6 \strokec6 i\cf5 \strokec5 ) \cf9 \strokec9 // 
+\f1 \'b2\'bb\'bf\'c9\'c9\'be\'b3\'fd\'ca\'fd\'be\'dd
+\f0 \cf5 \cb1 \strokec5 \
+\cb3           : \cf6 \strokec6 i\cf5 \strokec5 .\cf6 \strokec6 Type\cf5 \strokec5  === \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 type\cf5 \strokec5 .\cf6 \strokec6 folder\cf5 \cb1 \strokec5 \
+\cb3             ? \cf6 \strokec6 normal_data_folder\cf5 \strokec5 .\cf8 \strokec8 push\cf5 \strokec5 (\cf6 \strokec6 i\cf5 \strokec5 .\cf6 \strokec6 Id\cf5 \strokec5 ) \cf9 \strokec9 // 
+\f1 \'bf\'c9\'c9\'be\'b3\'fd\'ce\'c4\'bc\'fe\'bc\'d0
+\f0 \cf5 \cb1 \strokec5 \
+\cb3             : \cf6 \strokec6 normal_data_file\cf5 \strokec5 .\cf8 \strokec8 push\cf5 \strokec5 (\cf6 \strokec6 i\cf5 \strokec5 .\cf6 \strokec6 Id\cf5 \strokec5 ) \cf9 \strokec9 // 
+\f1 \'bf\'c9\'c9\'be\'b3\'fd\'ce\'c4\'bc\'fe
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \})\cb1 \
+\cb3       \cf9 \strokec9 // 
+\f1 \'b2\'bb\'bf\'c9\'c9\'be\'b3\'fd\'ca\'fd\'be\'dd\'bd\'f8\'d0\'d0\'cc\'e1\'ca\'be
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \cf12 \strokec12 if\cf5 \strokec5  (\cf6 \strokec6 cannot_del_data\cf5 \strokec5 .\cf6 \strokec6 length\cf5 \strokec5  > \cf11 \strokec11 0\cf5 \strokec5 ) \{\cb1 \
+\cb3         \cf4 \strokec4 let\cf5 \strokec5  \cf6 \strokec6 _msg\cf5 \strokec5  = \cf7 \strokec7 '<p class="title">
+\f1 \'d2\'d4\'cf\'c2\'ce\'c4\'bc\'fe\'bb\'f2\'ce\'c4\'bc\'fe\'bc\'d0\'b2\'bb\'bf\'c9\'c9\'be\'b3\'fd\'a3\'ac\'d2\'d1\'d7\'d4\'b6\'af\'b9\'fd\'c2\'cb
+\f0 </p>'\cf5 \cb1 \strokec5 \
+\cb3         \cf6 \strokec6 cannot_del_data\cf5 \strokec5 .\cf8 \strokec8 forEach\cf5 \strokec5 ((\cf6 \strokec6 i\cf5 \strokec5 ) \cf4 \strokec4 =>\cf5 \strokec5  \{\cb1 \
+\cb3           \cf6 \strokec6 _msg\cf5 \strokec5  += \cf7 \strokec7 `<p class="msg">\cf4 \strokec4 $\{\cf6 \strokec6 i\cf5 \strokec5 .\cf6 \strokec6 Name\cf4 \strokec4 \}\cf7 \strokec7 </p>`\cf5 \cb1 \strokec5 \
+\cb3         \})\cb1 \
+\cb3         \cf4 \strokec4 this\cf5 \strokec5 .\cf8 \strokec8 $message\cf5 \strokec5 (\{\cb1 \
+\cb3           \cf6 \strokec6 dangerouslyUseHTMLString:\cf5 \strokec5  \cf4 \strokec4 true\cf5 \strokec5 ,\cb1 \
+\cb3           \cf6 \strokec6 showClose:\cf5 \strokec5  \cf4 \strokec4 true\cf5 \strokec5 ,\cb1 \
+\cb3           \cf6 \strokec6 message:\cf5 \strokec5  \cf6 \strokec6 _msg\cf5 \strokec5 ,\cb1 \
+\cb3           \cf6 \strokec6 type:\cf5 \strokec5  \cf7 \strokec7 'warning'\cf5 \strokec5 ,\cb1 \
+\cb3           \cf6 \strokec6 customClass:\cf5 \strokec5  \cf7 \strokec7 'mulit-msg'\cf5 \cb1 \strokec5 \
+\cb3         \})\cb1 \
+\cb3       \}\cb1 \
+\cb3       \cf12 \strokec12 if\cf5 \strokec5  (\cf6 \strokec6 normal_data_folder\cf5 \strokec5 .\cf6 \strokec6 length\cf5 \strokec5  === \cf11 \strokec11 0\cf5 \strokec5  && \cf6 \strokec6 normal_data_file\cf5 \strokec5 .\cf6 \strokec6 length\cf5 \strokec5  === \cf11 \strokec11 0\cf5 \strokec5 ) \{\cb1 \
+\cb3         \cf12 \strokec12 return\cf5 \cb1 \strokec5 \
+\cb3       \}\cb1 \
+\cb3       \cf9 \strokec9 // 
+\f1 \'bf\'c9\'c9\'be\'b3\'fd\'ca\'fd\'be\'dd\'d5\'fd\'b3\'a3\'c9\'be\'b3\'fd
+\f0 \cf5 \cb1 \strokec5 \
+\cb3       \cf4 \strokec4 let\cf5 \strokec5  \cf6 \strokec6 _data\cf5 \strokec5  = \{\cb1 \
+\cb3         \cf6 \strokec6 FolderIds:\cf5 \strokec5  \cf6 \strokec6 normal_data_folder\cf5 \strokec5 ,\cb1 \
+\cb3         \cf6 \strokec6 FolderFileIds:\cf5 \strokec5  \cf6 \strokec6 normal_data_file\cf5 \cb1 \strokec5 \
+\cb3       \}\cb1 \
+\cb3       \cf8 \strokec8 delFileApi\cf5 \strokec5 (\cf6 \strokec6 _data\cf5 \strokec5 ).\cf8 \strokec8 then\cf5 \strokec5 ((\{ \cf6 \strokec6 data\cf5 \strokec5  \}) \cf4 \strokec4 =>\cf5 \strokec5  \{\cb1 \
+\cb3         \cf12 \strokec12 if\cf5 \strokec5  (\cf6 \strokec6 data\cf5 \strokec5 .\cf6 \strokec6 StatusCode\cf5 \strokec5  === \cf13 \strokec13 apiok\cf5 \strokec5 ) \{\cb1 \
+\cb3           \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 file_table_data\cf5 \strokec5  = \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 file_table_data\cf5 \strokec5 .\cf8 \strokec8 filter\cf5 \strokec5 (\cb1 \
+\cb3             (\cf6 \strokec6 i\cf5 \strokec5 ) \cf4 \strokec4 =>\cf5 \strokec5  ![...\cf6 \strokec6 normal_data_file\cf5 \strokec5 , ...\cf6 \strokec6 normal_data_folder\cf5 \strokec5 ].\cf8 \strokec8 includes\cf5 \strokec5 (\cf6 \strokec6 i\cf5 \strokec5 .\cf6 \strokec6 Id\cf5 \strokec5 )\cb1 \
+\cb3           )\cb1 \
+\cb3           \cf4 \strokec4 this\cf5 \strokec5 .\cf8 \strokec8 $message\cf5 \strokec5 (\{\cb1 \
+\cb3             \cf6 \strokec6 showClose:\cf5 \strokec5  \cf4 \strokec4 true\cf5 \strokec5 ,\cb1 \
+\cb3             \cf6 \strokec6 message:\cf5 \strokec5  \cf6 \strokec6 data\cf5 \strokec5 .\cf6 \strokec6 Message\cf5 \strokec5 ,\cb1 \
+\cb3             \cf6 \strokec6 type:\cf5 \strokec5  \cf7 \strokec7 'success'\cf5 \cb1 \strokec5 \
+\cb3           \})\cb1 \
+\cb3         \}\cb1 \
+\cb3       \})\cb1 \
+\cb3     \},\cb1 \
+\cb3     \cf9 \strokec9 // 
+\f1 \'bb\'f1\'c8\'a1\'cb\'f9\'d3\'d0\'ce\'c4\'bc\'fe\'bc\'d0
+\f0 \cf5 \cb1 \strokec5 \
+\cb3     \cf8 \strokec8 getAllFolders\cf5 \strokec5  () \{\cb1 \
+\cb3       \cf8 \strokec8 getAllFoldersApi\cf5 \strokec5 ().\cf8 \strokec8 then\cf5 \strokec5 ((\{ \cf6 \strokec6 data\cf5 \strokec5  \}) \cf4 \strokec4 =>\cf5 \strokec5  \{\cb1 \
+\cb3         \cf12 \strokec12 if\cf5 \strokec5  (\cf6 \strokec6 data\cf5 \strokec5 .\cf6 \strokec6 StatusCode\cf5 \strokec5  === \cf13 \strokec13 apiok\cf5 \strokec5 ) \{\cb1 \
+\cb3           \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 all_folder_list\cf5 \strokec5  = \cf6 \strokec6 data\cf5 \strokec5 .\cf6 \strokec6 Data\cf5 \strokec5  || []\cb1 \
+\cb3           \cf4 \strokec4 let\cf5 \strokec5  \cf6 \strokec6 _list\cf5 \strokec5  = [...\cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 all_folder_list\cf5 \strokec5 ]\cb1 \
+\cb3           \cf4 \strokec4 let\cf5 \strokec5  \cf6 \strokec6 options\cf5 \strokec5  = \{\cb1 \
+\cb3             \cf6 \strokec6 id:\cf5 \strokec5  \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 explorer_prop\cf5 \strokec5 .\cf6 \strokec6 pathId\cf5 \strokec5 ,\cb1 \
+\cb3             \cf6 \strokec6 pid:\cf5 \strokec5  \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 explorer_prop\cf5 \strokec5 .\cf6 \strokec6 pathPid\cf5 \strokec5 ,\cb1 \
+\cb3             \cf6 \strokec6 children:\cf5 \strokec5  \cf7 \strokec7 'children'\cf5 \cb1 \strokec5 \
+\cb3           \}\cb1 \
+\cb3           \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 tree_folder_list\cf5 \strokec5  = \cf8 \strokec8 arrayToTree\cf5 \strokec5 (\cf6 \strokec6 _list\cf5 \strokec5 , \cf6 \strokec6 options\cf5 \strokec5 )\cb1 \
+\cb3         \}\cb1 \
+\cb3       \})\cb1 \
+\cb3     \},\cb1 \
+\cb3     \cf9 \strokec9 // 
+\f1 \'c5\'d0\'b6\'cf\'ca\'c7\'b7\'f1\'ce\'c4\'bc\'fe\'bc\'d0\'ba\'af\'ca\'fd
+\f0 \cf5 \cb1 \strokec5 \
+\cb3     \cf8 \strokec8 isFolderFn\cf5 \strokec5  (\cf6 \strokec6 row\cf5 \strokec5 ) \{\cb1 \
+\cb3       \cf12 \strokec12 return\cf5 \strokec5  \cf6 \strokec6 row\cf5 \strokec5 .\cf6 \strokec6 type\cf5 \strokec5  === \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 type\cf5 \strokec5 .\cf6 \strokec6 folder\cf5 \cb1 \strokec5 \
+\cb3     \}\cb1 \
+\cb3   \},\cb1 \
+\cb3   \cf9 \strokec9 // 
+\f1 \'d2\'b3\'c3\'e6\'b3\'f5\'ca\'bc\'bb\'af\'ca\'b1\'bb\'e1\'d6\'b4\'d0\'d0
+\f0 created()\cf5 \cb1 \strokec5 \
+\cb3   \cf8 \strokec8 created\cf5 \strokec5  () \{\cb1 \
+\cb3     \cf4 \strokec4 this\cf5 \strokec5 .\cf6 \strokec6 closeOtherLayout\cf5 \strokec5  = \cf6 \strokec6 closeOtherLayout\cf5 \cb1 \strokec5 \
+\cb3     \cf4 \strokec4 this\cf5 \strokec5 .\cf8 \strokec8 getAllFolders\cf5 \strokec5 ()\cb1 \
+\cb3     \cf4 \strokec4 this\cf5 \strokec5 .\cf8 \strokec8 getFileList\cf5 \strokec5 ()\cb1 \
+\cb3   \}\cb1 \
+\cb3 \}\cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 \cb3 \strokec2 </\cf4 \strokec4 script\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
+}
