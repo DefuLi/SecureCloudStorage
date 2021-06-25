@@ -2,7 +2,9 @@ package cn.xjtu.iotlab.controller;
 
 import cn.xjtu.iotlab.service.impl.CertServiceImpl;
 import cn.xjtu.iotlab.service.impl.FilesManagerServiceImpl;
+import cn.xjtu.iotlab.utils.encdec.FileSearch;
 import cn.xjtu.iotlab.utils.encdec.TestBF;
+import cn.xjtu.iotlab.vo.BFFile;
 import cn.xjtu.iotlab.vo.Files;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.util.Date;
+import java.util.List;
 
 /**
  * BF 文件加解密模块
@@ -35,12 +39,12 @@ public class BFEncDecController {
         FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), file);
         TestBF bf = new TestBF();
         System.out.println(username);
-        boolean signal= bf.filebfencrpt(file,username);
+        String signal= bf.filebfencrpt(file,username);
         //前端
         //保存
         //上传
         //取消
-        if(signal == true)
+        if(signal != null)
         return 1;
         else{
             return 0;
@@ -106,9 +110,28 @@ public class BFEncDecController {
           if(certService.findCert(LoginUserName,CreateUserName)==false) return "nocert";
         }
         TestBF bf = new TestBF();
-        boolean signal= bf.filebfencrpt(file,LoginUserName);
-        if(signal == true)
-            return "success"+FileName;
+        String signal= bf.filebfencrpt(file,LoginUserName);
+        if(signal !=null) {
+            System.out.println(signal);
+            File f = new File(signal);
+            int PID = filesManagerService.getBFencPID(LoginUserName);
+            Files files = valuesToFile(f, LoginUserName,PID);//插入数据库
+            filesManagerService.insertFiles(files);
+            String userName = LoginUserName;
+            String fileName = f.getName();
+            int rand =10086;
+            FileSearch fileSearch = new FileSearch(userName);
+            // System.out.println(fileName);
+            System.out.println(userName);
+            fileSearch.random = Integer.toString(rand);
+            List<String> BFValues = fileSearch.keywordSplitByFileName(FileName,rand);
+            int id = filesManagerService.getIdByName(fileName,userName,PID);
+            for(String bfValue: BFValues){
+                filesManagerService.insertFilesBF(new BFFile(id, fileName, bfValue));
+                System.out.println(bfValue);
+            }
+            return "success" + FileName;
+        }
         else{
 
             return "failed";
@@ -138,6 +161,9 @@ public class BFEncDecController {
             return "failed";
         else{
             File f = new File(signal);
+            int PID = filesManagerService.getBFdecPID(LoginUserName);
+            Files files = valuesToFile(f, LoginUserName,PID);//插入数据库
+            filesManagerService.insertFiles(files);
             String fileName = f.getName();
             return "success"+fileName;
         }
@@ -153,6 +179,54 @@ public class BFEncDecController {
             tempId = tempFile.getParentId();
         }
         return tempPath.toString();
+    }
+    public Files valuesToFile(File file,String userName, int parentId){
+        int id = filesManagerService.getMaxId();
+        System.out.println(id);
+        Files temp = new Files();
+        String suffixName;
+        String name = file.getName();
+        temp.setId(id+1);
+        temp.setName(name);//文件名
+        temp.setCreateUserName(userName);//创建用户名
+        temp.setEditBy(userName);//修改用户名
+        temp.setDescribe(null);//描述
+        Long lastModified = file.lastModified();
+        Date editDate = new Date(lastModified);
+        temp.setCreateTime(editDate);//文件创建时间
+        temp.setEditTime(editDate);//文件修改时间
+        temp.setParentId(parentId);//设置父目录
+        temp.setSize((int)file.length());//文件大小
+        System.out.println(name + ":" + file.isDirectory());
+        if(file.isDirectory()){
+            suffixName = "";
+            temp.setSuffixName(null);
+        }else{
+            suffixName = name.substring(name.lastIndexOf("."));
+            temp.setSuffixName(suffixName);//文件后缀名
+        }
+//        temp.setSuffixName("txt");
+        temp.setType(getFileType(suffixName));//文件图标类型
+        temp.setFileType(3);//文件类型
+        return temp;
+    }
+
+    /**
+     * 根据文件后缀名返回文件类型，1是文件夹
+     * @param suffixName 后缀名
+     * @return type
+     */
+    public int getFileType(String suffixName){
+        String suffix = suffixName.toLowerCase();
+        if(suffix.equals("jpg") || suffix.equals("jpeg") || suffix.equals("png")){
+            return 2;
+        }else if(suffix.equals("")){
+            return 1;
+        }else if(suffix.equals("mp4")){
+            return 3;
+        }else{
+            return 4;
+        }
     }
 
 }

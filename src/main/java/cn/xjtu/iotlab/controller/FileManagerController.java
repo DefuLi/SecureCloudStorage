@@ -138,23 +138,23 @@ public class FileManagerController {
         return jsonObject;
     }
 
-    @RequestMapping(value = "/saveBFValue", method = RequestMethod.POST)
-    public void saveBFValue(HttpServletRequest req, HttpSession session){
-//        String fileName = req.getParameter("fileName");
-//        String userName = req.getParameter("userName");
-        String fileName = "西安新一线城市.txt";
-        String userName = "admin";
-        FileSearch fileSearch = new FileSearch(userName);
-        System.out.println(fileName);
-        System.out.println(userName);
-        fileSearch.random = Integer.toString(rand);
-        List<String> BFValues = fileSearch.keywordSplitByFileName(fileName,rand);
-        int id = filesManagerService.getIdByName(fileName,userName);
-        for(String bfValue: BFValues){
-            filesManagerService.insertFilesBF(new BFFile(id, fileName, bfValue));
-            System.out.println(bfValue);
-        }
-    }
+//    @RequestMapping(value = "/saveBFValue", method = RequestMethod.POST)
+//    public void saveBFValue(HttpServletRequest req, HttpSession session){
+////        String fileName = req.getParameter("fileName");
+////        String userName = req.getParameter("userName");
+//        String fileName = "西安新一线城市.txt";
+//        String userName = "admin";
+//        FileSearch fileSearch = new FileSearch(userName);
+//        System.out.println(fileName);
+//        System.out.println(userName);
+//        fileSearch.random = Integer.toString(rand);
+//        List<String> BFValues = fileSearch.keywordSplitByFileName(fileName,rand);
+//        int id = filesManagerService.getIdByName(fileName,userName);
+//        for(String bfValue: BFValues){
+//            filesManagerService.insertFilesBF(new BFFile(id, fileName, bfValue));
+//            System.out.println(bfValue);
+//        }
+//    }
 
 
     //判断是否登录成功

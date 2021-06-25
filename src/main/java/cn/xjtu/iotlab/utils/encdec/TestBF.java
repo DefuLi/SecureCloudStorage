@@ -2,6 +2,8 @@ package cn.xjtu.iotlab.utils.encdec;//import org.eclipse.swt.SWT;
 //import org.eclipse.swt.widgets.FileDialog;
 //import org.eclipse.swt.widgets.Shell;
 
+import cn.xjtu.iotlab.vo.Files;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.swing.*;
@@ -837,7 +839,7 @@ public class TestBF {
         return result;
     }
 
-    public boolean filebfencrpt(File file, String username){
+    public String filebfencrpt(File file, String username){
         System.out.println("------"+username);
         File dirFile = new  File("src/main/resources/iotlab/"+username+"/BF加密");
         if (! (dirFile.exists())&& !(dirFile.isDirectory())) dirFile.mkdirs();
@@ -852,7 +854,7 @@ public class TestBF {
         if (f.length() == 0) {
             System.out.println("文件内容为空，不加密");
             //JOptionPane.showMessageDialog( mainPanel,"文件  "+filedir[i]+"内容为空，不加密");
-            return false;
+            return null;
         }
         String name = f.getName();
         en_name = aes.encrypt(name);
@@ -914,7 +916,7 @@ public class TestBF {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return true;
+        return f1.getPath();
     }
 
     public String filebfdecrpt(File file, String username) throws BadPaddingException, IllegalBlockSizeException, IOException {

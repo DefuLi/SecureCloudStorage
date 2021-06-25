@@ -77,7 +77,14 @@ public class CertController {
         Cert cert = new Cert();
         String authorizedUser = authorizeduser;
         String authorUser = authoruser;
-        String sp=authorUser+"&"+authorizedUser+"&"+accesstype;
+        String aes_key="123456"+authoruser;
+        String rsa_key1="123456";
+        String rsa_key2="123456";
+        long opeart_k=25689L;
+        int cescmc_k=1;
+        int cescmc_n=1;
+        Cert1 cert1 = new Cert1();
+        String sp=cert1.produceCert2(authorUser,authorizedUser,aes_key,rsa_key1,rsa_key2,opeart_k,cescmc_k,cescmc_n);
         cert.setAuthorizeduser(authorizedUser);
         cert.setAuthoruser(authorUser);
         cert.setAccesstype(accesstype);

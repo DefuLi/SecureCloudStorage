@@ -55,7 +55,7 @@
     </insert>
 
     <select id="getIdByName" resultType="java.lang.Integer">
-        select Id from fileList where Name = #{0} and CreateUserName = #{1}
+        select min(Id) from fileList where Name = #{0} and CreateUserName = #{1} and ParentId = #{2}
     </select>
 
     <select id="getFilesByBFLocal" parameterType="java.lang.String" resultType="cn.xjtu.iotlab.vo.Files">
@@ -72,5 +72,13 @@
 
     <select id="getMaxId" resultType="java.lang.Integer">
         select max(Id) from fileList
+    </select>
+
+    <select id="getBFencPID" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select Id from fileList where `Name` = 'BF加密' and ParentId = 0 and CreateUserName = #{username}
+    </select>
+
+    <select id="getBFdecPID" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select Id from fileList where `Name` = 'BF解密' and ParentId = 0 and CreateUserName = #{username}
     </select>
 </mapper>

@@ -63,8 +63,8 @@ public class FilesManagerServiceImpl implements FilesManagerService {
     }
 
     //根据文件名搜索Id
-    public int getIdByName(String fileName, String userName){
-        return filesManagerMapper.getIdByName(fileName, userName);
+    public int getIdByName(String fileName, String userName, int PID){
+        return filesManagerMapper.getIdByName(fileName, userName,PID);
     }
 
     //BF局部搜索
@@ -81,4 +81,8 @@ public class FilesManagerServiceImpl implements FilesManagerService {
     public int getMaxId(){
         return filesManagerMapper.getMaxId();
     }
+
+    public int getBFencPID(String username){return filesManagerMapper.getBFencPID(username);}
+
+    public int getBFdecPID(String username){return filesManagerMapper.getBFdecPID(username);}
 }
