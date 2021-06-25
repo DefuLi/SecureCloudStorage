@@ -40,4 +40,9 @@
         delete from cert
         where cert = #{cert,jdbcType=VARCHAR}
     </delete>
+    <select id="findCert" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(*)
+    from cert
+    where authoruser = #{0} and authorizeduser= #{1}
+  </select>
 </mapper>

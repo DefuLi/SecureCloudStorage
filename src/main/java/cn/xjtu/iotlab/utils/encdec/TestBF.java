@@ -838,11 +838,12 @@ public class TestBF {
     }
 
     public boolean filebfencrpt(File file, String username){
-        File dirFile = new  File("D:\\learngit\\SecureCloudStorage\\src\\main\\resources\\iotlab\\"+username+"BF加密");
-        if (! (dirFile.exists())&& ! (dirFile.isDirectory())) dirFile.mkdirs();
+        System.out.println("------"+username);
+        File dirFile = new  File("src/main/resources/iotlab/"+username+"/BF加密");
+        if (! (dirFile.exists())&& !(dirFile.isDirectory())) dirFile.mkdirs();
         AES aes= new AES();
         AllFile allF=new AllFile();
-        int rand = 23*10000;
+        int rand = 10086;
         String BF;
         String filedir;
         File f = file;
@@ -861,7 +862,7 @@ public class TestBF {
         System.out.println(en_content);
         String[] kw = kwAbstract(name);
         BF = kwBF(kw,0.001,rand);
-        File f1 = new File("D:\\learngit\\SecureCloudStorage\\src\\main\\resources\\iotlab\\"+ username+"\\"+"BF加密\\" +en_name+ ".txt");
+        File f1 = new File("src/main/resources/iotlab/"+ username+"/"+"BF加密/" +en_name+ ".enc");
         if (!f1.exists()) {
             try {
                 f1.createNewFile();
@@ -885,7 +886,7 @@ public class TestBF {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        File f2=new File("D:\\qingyunclient\\atest\\encrypted_file\\"+username+"\\0.txt");
+        File f2=new File("src/main/resources/iotlab/"+username+"/0.txt");
         if (!f.exists()) {
             try {
                 f.createNewFile();
@@ -916,17 +917,18 @@ public class TestBF {
         return true;
     }
 
-    public boolean filebfdecrpt(File file, String username) throws BadPaddingException, IllegalBlockSizeException, IOException {
+    public String filebfdecrpt(File file, String username) throws BadPaddingException, IllegalBlockSizeException, IOException {
         unZip zips=new unZip();
+        String returnpath="";
         String de_name1="";
         String content1="";
         AllFile allF=new AllFile();
-        File dirFile = new  File("D:\\learngit\\SecureCloudStorage\\src\\main\\resources\\iotlab\\"+ username+"\\"+"BF解密\\");
+        File dirFile = new  File("src/main/resources/iotlab/"+ username+"/"+"BF解密/");
         if (! (dirFile.exists())&& ! (dirFile.isDirectory())) dirFile.mkdirs();
         String pt = file.getName();
         String name = file.getName();
         pt=pt.substring(pt.indexOf(".")+1);
-        if(pt.compareTo("txt")!=0) return false;
+        if(pt.compareTo("enc")!=0) return null;
         String fromother="";
         //String owner_name=name.substring(name.indexOf("__")+1);
         if(name.indexOf("___")!=-1){
@@ -958,15 +960,14 @@ public class TestBF {
             }
 
             String de_content=aes.decrypt(content1); //解密的文件内容
-            String url="D:\\learngit\\SecureCloudStorage\\src\\main\\resources\\iotlab\\"+username+"\\"+"BF解密\\"+de_name1;
+            String url="src/main/resources/iotlab/"+username+"/"+"BF解密/"+de_name1;
             allF.writeFile(de_content, url);
-
+            returnpath =url;
 
         }else{//他人的
 
         }
-
-        return true;
+        return returnpath;
     }
 
     public static void main(String args[]) {
