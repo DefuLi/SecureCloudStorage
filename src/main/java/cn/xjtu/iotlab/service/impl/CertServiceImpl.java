@@ -27,4 +27,10 @@ public class CertServiceImpl implements CertService {
 
     @Override
     public boolean deleteCert(Cert cert){return CertMapper.deleteCert(cert)>0?true:false;}
+
+    @Override
+    public boolean findCert(String authoruser,String authorizeduser){
+
+        System.out.println("cert----------"+authoruser+authorizeduser+CertMapper.findCert(authoruser,authorizeduser));
+        return CertMapper.findCert(authoruser,authorizeduser)>0?true:false;}
 }

@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 
 public class AllFile {
 
+
 	public String readFile(String url){
 	    //String type=url.substring(url.indexOf(".")+1);
 		byte[] buffer=new byte[1024];

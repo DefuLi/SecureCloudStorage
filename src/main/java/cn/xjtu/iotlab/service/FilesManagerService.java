@@ -35,7 +35,7 @@ public interface FilesManagerService {
     public void insertFilesBF(BFFile bfFile);
 
     //根据文件名搜索Id
-    public int getIdByName(String fileName, String userName);
+    public int getIdByName(String fileName, String userName, int PID);
 
     //BF局部搜索
     public List<Files> getFilesByBFLocal(String bfValue, String userName);
@@ -45,4 +45,8 @@ public interface FilesManagerService {
 
     //获取到当前id的最大值，方便上传文件后将其插入数据库
     public int getMaxId();
+
+    public int getBFencPID(String username);
+
+    public int getBFdecPID(String username);
 }
