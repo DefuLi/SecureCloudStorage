@@ -8,7 +8,9 @@ import cn.xjtu.iotlab.utils.encdec.FileSearch;
 import cn.xjtu.iotlab.vo.BFFile;
 import cn.xjtu.iotlab.vo.Files;
 import com.alibaba.fastjson.JSONObject;
+import javafx.beans.binding.ObjectExpression;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,15 +18,18 @@ import org.springframework.web.multipart.MultipartFile;
 import sun.nio.cs.ext.SJIS;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.net.URLEncoder;
 import java.util.*;
+
+import static org.springframework.boot.web.servlet.server.Encoding.DEFAULT_CHARSET;
 
 @RestController
 @Controller
 @RequestMapping("/fileManager")
+@CrossOrigin
 public class FileManagerController {
 //    int rand=(int)(Math.random()*10000);
     int rand = 10086;
@@ -172,9 +177,42 @@ public class FileManagerController {
         FileUtils.copyInputStreamToFile(multipartFile.getInputStream(), file);
         //移动文件
 
+        Files files = valuesToFile(file, userName, Integer.parseInt(pathId));//插入数据库
+        filesManagerService.insertFiles(files);
         return "success";
     }
 
+    @RequestMapping(value = "/downloadFile", method = RequestMethod.POST)
+    @ResponseBody
+    public Object downloadFile(HttpServletRequest req, HttpSession session, HttpServletResponse resp) throws Exception {
+        String id = req.getParameter("fileInfo");
+        System.out.println(id);
+        Files files = filesManagerService.searchById(Integer.parseInt(id));
+        String basePath = "src/main/resources/iotlab/" + files.getCreateUserName();
+        String path = basePath + getFilePath(files.getParentId(), files.getCreateUserName()) + "/" + files.getName();
+        System.out.println(path);
+        File file = new File(path);
+//        String absolutePath = file.getAbsolutePath();
+
+        download(file, resp);
+//        JSONObject jsonObject = new JSONObject();
+//        jsonObject.put("Message", "操作成功");
+//        jsonObject.put("StatusCode",200);
+//        jsonObject.put("CallbackType", null);
+//        jsonObject.put("headers",files.getName());
+//        jsonObject.put("data", file.getAbsoluteFile());
+//
+//
+//        return jsonObject;
+        return null;
+    }
+
+    /**
+     * 根据parentId获取文件相对路径
+     * @param parentId 父目录id
+     * @param userName 用户名
+     * @return 文件的相对路径
+     */
     public String getFilePath(int parentId, String userName){
 //        System.out.println("parent id: " + parentId);
         int tempId = parentId;
@@ -185,6 +223,132 @@ public class FileManagerController {
             tempId = tempFile.getParentId();
         }
         return tempPath.toString();
+    }
+
+//    public void insertFileToDB(File file, int parentId){
+//        int id = filesManagerService.getMaxId();
+//        System.out.println(id);
+//        Files files = new Files();
+//        files.setId(id);
+//        files.setParentId(parentId);
+//
+//    }
+
+    /**
+     * 给Files赋值
+     * @param file 当前遍历到的文件
+     * @param userName 用户名
+     * @return Files对象
+     */
+    public Files valuesToFile(File file,String userName, int parentId){
+        int id = filesManagerService.getMaxId();
+        System.out.println(id);
+        Files temp = new Files();
+        String suffixName;
+        String name = file.getName();
+        temp.setId(id+1);
+        temp.setName(name);//文件名
+        temp.setCreateUserName(userName);//创建用户名
+        temp.setEditBy(userName);//修改用户名
+        temp.setDescribe(null);//描述
+        Long lastModified = file.lastModified();
+        Date editDate = new Date(lastModified);
+        temp.setCreateTime(editDate);//文件创建时间
+        temp.setEditTime(editDate);//文件修改时间
+        temp.setParentId(parentId);//设置父目录
+        temp.setSize((int)file.length());//文件大小
+        System.out.println(name + ":" + file.isDirectory());
+        if(file.isDirectory()){
+            suffixName = "";
+            temp.setSuffixName(null);
+        }else{
+            suffixName = name.substring(name.lastIndexOf("."));
+            temp.setSuffixName(suffixName);//文件后缀名
+        }
+//        temp.setSuffixName("txt");
+        temp.setType(getFileType(suffixName));//文件图标类型
+        temp.setFileType(3);//文件类型
+        return temp;
+    }
+
+    /**
+     * 根据文件后缀名返回文件类型，1是文件夹
+     * @param suffixName 后缀名
+     * @return type
+     */
+    public int getFileType(String suffixName){
+        String suffix = suffixName.toLowerCase();
+        if(suffix.equals("jpg") || suffix.equals("jpeg") || suffix.equals("png")){
+            return 2;
+        }else if(suffix.equals("")){
+            return 1;
+        }else if(suffix.equals("mp4")){
+            return 3;
+        }else{
+            return 4;
+        }
+    }
+
+    public void download(File file, HttpServletResponse response) throws IOException {
+
+        //下载后的文件名
+        String fileName = file.getName();
+        if (file.exists()) {
+//            System.out.println("--------");
+            // 配置文件下载
+            response.setHeader("content-type", "application/octet-stream");
+            response.setContentType("application/octet-stream");
+//             下载文件能正常显示中文
+            response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+            response.setHeader("Content-Length",""+file.length());
+//             实现文件下载
+            byte[] buffer = new byte[1024];
+            FileInputStream fis = null;
+            BufferedInputStream bis = null;
+            try {
+                fis = new FileInputStream(file);
+                bis = new BufferedInputStream(fis);
+//                OutputStream os = response.getOutputStream();
+                int i = bis.read(buffer);
+                while (i != -1) {
+                    response.getOutputStream().write(buffer, 0, i);
+                    i = bis.read(buffer);
+                }
+                System.out.println("文件下载完成！！");
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            finally {
+                response.getOutputStream().flush();
+                response.getOutputStream().close();
+                if (bis != null) {
+                    try {
+                        bis.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (fis != null) {
+                    try {
+                        fis.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+    public static void setResponse(String fileName, HttpServletResponse response) {
+        // 清空输出流
+        response.reset();
+        response.setContentType("application/x-download;charset=GBK");
+        try {
+            response.setHeader("Content-Disposition", "attachment;filename=" + new String(fileName.getBytes("utf-8"), "iso-8859-1"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
 

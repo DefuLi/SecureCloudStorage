@@ -69,4 +69,8 @@
         select distinct id from fileBF where BFValue = #{bfValue}
         )
     </select>
+
+    <select id="getMaxId" resultType="java.lang.Integer">
+        select max(Id) from fileList
+    </select>
 </mapper>
