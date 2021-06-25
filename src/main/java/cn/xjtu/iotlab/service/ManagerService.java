@@ -1,5 +1,10 @@
 package cn.xjtu.iotlab.service;
 
+import cn.xjtu.iotlab.vo.Behavior;
+import cn.xjtu.iotlab.vo.User;
+
+import java.util.List;
+
 /**
  * 管理员Service层
  *
@@ -8,4 +13,10 @@ package cn.xjtu.iotlab.service;
  */
 public interface ManagerService {
     void approve(String name);
+
+    List<User> getRegister();
+
+    Behavior userBehavior();
+
+    float computeScore();
 }

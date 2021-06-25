@@ -46,4 +46,7 @@ public interface FilesManagerMapper {
     //BF全局搜索
     public List<Files> getFilesByBFGlobal(String bfValue);
 
+    //获取到当前id的最大值，方便上传文件后将其插入数据库
+    public int getMaxId();
+
 }

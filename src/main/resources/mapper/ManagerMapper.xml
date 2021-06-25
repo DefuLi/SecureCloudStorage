@@ -14,4 +14,11 @@
         update user set approveflag=1 where name=#{0}
     </update>
 
+    <select id="getRegister" resultMap="BaseResultMap">
+        select * from user where approveflag = 0
+    </select>
+
+    <select id="userBehavior" resultType="cn.xjtu.iotlab.vo.Behavior">
+        select * from behavior
+    </select>
 </mapper>
