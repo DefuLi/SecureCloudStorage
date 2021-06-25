@@ -76,4 +76,9 @@ public class FilesManagerServiceImpl implements FilesManagerService {
     public List<Files> getFilesByBFGlobal(String bfValue){
         return filesManagerMapper.getFilesByBFGlobal(bfValue);
     }
+
+    //获取到当前id的最大值，方便上传文件后将其插入数据库
+    public int getMaxId(){
+        return filesManagerMapper.getMaxId();
+    }
 }
