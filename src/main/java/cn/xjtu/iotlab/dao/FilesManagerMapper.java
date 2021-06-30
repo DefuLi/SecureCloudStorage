@@ -29,10 +29,10 @@ public interface FilesManagerMapper {
     public List<Files> getRootFile(String userName);
 
     //明文局部搜索
-    public List<Files> getFilesByNameLocal(String fileName, String userName);
+    public List<Files> getFilesByNameLocal(String fileName, String userName, String suffixName);
 
     //明文全局搜索
-    public List<Files> getFilesByNameGlobal(String fileName);
+    public List<Files> getFilesByNameGlobal(String fileName, String suffixName);
 
     //插入文件的BF值
     public void insertFilesBF(BFFile bfFile);
@@ -41,10 +41,10 @@ public interface FilesManagerMapper {
     public int getIdByName(String fileName, String userName, int PID);
 
     //BF局部搜索
-    public List<Files> getFilesByBFLocal(String bfValue, String userName);
+    public List<Files> getFilesByBFLocal(String bfValue, String userName, String suffixName);
 
     //BF全局搜索
-    public List<Files> getFilesByBFGlobal(String bfValue);
+    public List<Files> getFilesByBFGlobal(String bfValue, String suffixName);
 
     //获取到当前id的最大值，方便上传文件后将其插入数据库
     public int getMaxId();
