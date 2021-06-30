@@ -81,8 +81,21 @@ public class FileManagerController {
         JSONObject jsonObject = new JSONObject();
         String BFFileName = req.getParameter("fileName");
         String fileName = req.getParameter("fileName");
+//        System.out.println(fileName);
+//        System.out.println(BFFileName);
         int type = Integer.parseInt(req.getParameter("type"));
         String CreateUsername = req.getParameter("userName");
+
+        String suffixName = ".";
+        if(fileName.contains(".")){
+            suffixName = fileName.substring(fileName.lastIndexOf("."));
+//            System.out.println(fileName.substring(0, fileName.lastIndexOf(".")));
+            fileName = fileName.substring(0, fileName.lastIndexOf("."));
+            BFFileName = BFFileName.substring(0, BFFileName.lastIndexOf("."));
+//            System.out.println(fileName);
+//            System.out.println(BFFileName);
+        }
+
 
         jsonObject.put("Message", "操作成功");
         jsonObject.put("StatusCode",200);
@@ -94,24 +107,27 @@ public class FileManagerController {
         }
 
         fileName = "%" + fileName + "%";
+        suffixName = "%" + suffixName + "%";
+        System.out.println(fileName);
+        System.out.println(BFFileName);
         //BF搜索
         FileSearch fileSearch = new FileSearch(CreateUsername);
         List<String> searchKwBF = fileSearch.searchKeywordSplit(BFFileName,rand);//将搜索关键字划分为BF值
         //明文局部搜索
         if(type == 1){
-            targetFiles = filesManagerService.getFilesByNameLocal(fileName, CreateUsername);
+            targetFiles = filesManagerService.getFilesByNameLocal(fileName, CreateUsername, suffixName);
             System.out.println(targetFiles.size());
         }
         //明文全局搜索
         else if(type == 2){
-            targetFiles = filesManagerService.getFilesByNameGlobal(fileName);
+            targetFiles = filesManagerService.getFilesByNameGlobal(fileName, suffixName);
             System.out.println(targetFiles.size());
         }
         //BF局部搜索
         else if(type == 3){
             Set<Integer> ids = new HashSet<>();
             for(String searchBF:searchKwBF){
-                List<Files> temp = filesManagerService.getFilesByBFLocal(searchBF, CreateUsername);
+                List<Files> temp = filesManagerService.getFilesByBFLocal(searchBF, CreateUsername, suffixName);
                 for(Files f:temp){
                     if(!ids.contains(f.getId())){
                         targetFiles.add(f);
@@ -124,7 +140,7 @@ public class FileManagerController {
         else{
             Set<Integer> ids = new HashSet<>();
             for(String searchBF:searchKwBF){
-                List<Files> temp = filesManagerService.getFilesByBFGlobal(searchBF);
+                List<Files> temp = filesManagerService.getFilesByBFGlobal(searchBF, suffixName);
                 for(Files f:temp){
                     if(!ids.contains(f.getId())){
                         targetFiles.add(f);
@@ -192,18 +208,8 @@ public class FileManagerController {
         String path = basePath + getFilePath(files.getParentId(), files.getCreateUserName()) + "/" + files.getName();
         System.out.println(path);
         File file = new File(path);
-//        String absolutePath = file.getAbsolutePath();
 
         download(file, resp);
-//        JSONObject jsonObject = new JSONObject();
-//        jsonObject.put("Message", "操作成功");
-//        jsonObject.put("StatusCode",200);
-//        jsonObject.put("CallbackType", null);
-//        jsonObject.put("headers",files.getName());
-//        jsonObject.put("data", file.getAbsoluteFile());
-//
-//
-//        return jsonObject;
         return null;
     }
 
@@ -289,6 +295,12 @@ public class FileManagerController {
         }
     }
 
+    /**
+     * 下载文件
+     * @param file 待下载文件的File对象
+     * @param response 返回值
+     * @throws IOException IO异常
+     */
     public void download(File file, HttpServletResponse response) throws IOException {
 
         //下载后的文件名
