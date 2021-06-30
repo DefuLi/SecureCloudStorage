@@ -48,13 +48,13 @@ public class FilesManagerServiceImpl implements FilesManagerService {
     }
 
     //明文局部搜索
-    public List<Files> getFilesByNameLocal(String fileName, String userName){
-        return filesManagerMapper.getFilesByNameLocal(fileName, userName);
+    public List<Files> getFilesByNameLocal(String fileName, String userName, String suffixName){
+        return filesManagerMapper.getFilesByNameLocal(fileName, userName, suffixName);
     }
 
     //明文全局搜索
-    public List<Files> getFilesByNameGlobal(String fileName){
-        return filesManagerMapper.getFilesByNameGlobal(fileName);
+    public List<Files> getFilesByNameGlobal(String fileName, String suffixName){
+        return filesManagerMapper.getFilesByNameGlobal(fileName, suffixName);
     }
 
     //插入文件的BF值
@@ -68,13 +68,13 @@ public class FilesManagerServiceImpl implements FilesManagerService {
     }
 
     //BF局部搜索
-    public List<Files> getFilesByBFLocal(String bfValue, String userName){
-        return filesManagerMapper.getFilesByBFLocal(bfValue, userName);
+    public List<Files> getFilesByBFLocal(String bfValue, String userName, String suffixName){
+        return filesManagerMapper.getFilesByBFLocal(bfValue, userName, suffixName);
     }
 
     //BF全局搜索
-    public List<Files> getFilesByBFGlobal(String bfValue){
-        return filesManagerMapper.getFilesByBFGlobal(bfValue);
+    public List<Files> getFilesByBFGlobal(String bfValue, String suffixName){
+        return filesManagerMapper.getFilesByBFGlobal(bfValue, suffixName);
     }
 
     //获取到当前id的最大值，方便上传文件后将其插入数据库

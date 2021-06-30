@@ -43,11 +43,11 @@
     </delete>
 
     <select id="getFilesByNameLocal" parameterType="java.lang.String" resultType="cn.xjtu.iotlab.vo.Files">
-        select * from fileList where CreateUserName = #{1} and Name like #{0}
+        select * from fileList where CreateUserName = #{1} and Name like #{0} and SuffixName like #{2}
     </select>
 
     <select id="getFilesByNameGlobal" parameterType="java.lang.String" resultType="cn.xjtu.iotlab.vo.Files">
-        select * from fileList where Name like #{Name}
+        select * from fileList where Name like #{0} and SuffixName like #{1}
     </select>
 
     <insert id="insertFilesBF" parameterType="cn.xjtu.iotlab.vo.BFFile">
@@ -59,14 +59,14 @@
     </select>
 
     <select id="getFilesByBFLocal" parameterType="java.lang.String" resultType="cn.xjtu.iotlab.vo.Files">
-        select * from fileList where CreateUserName = #{1} and Id in(
+        select * from fileList where CreateUserName = #{1} and SuffixName like #{2} and Id in(
         select id from fileBF where BFValue = #{0}
         )
     </select>
 
     <select id="getFilesByBFGlobal" resultType="cn.xjtu.iotlab.vo.Files">
-        select * from fileList where Id in(
-        select distinct id from fileBF where BFValue = #{bfValue}
+        select * from fileList where Id and SuffixName like #{1} in(
+        select distinct id from fileBF where BFValue = #{0}
         )
     </select>
 
