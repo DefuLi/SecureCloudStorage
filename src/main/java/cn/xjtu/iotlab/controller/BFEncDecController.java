@@ -31,7 +31,7 @@ public class BFEncDecController {
     FilesManagerServiceImpl filesManagerService;
     @Autowired
     CertServiceImpl certService;
-    //文件加密
+    //文件加密,将本地选中传入的文件进行BF加密
     @ResponseBody
     @RequestMapping(value = "/bfencrypt", method = RequestMethod.POST)
     public int BFEncrypt(@RequestParam("file") MultipartFile multipartFile , @RequestParam("username") String username) throws IOException {
@@ -51,7 +51,7 @@ public class BFEncDecController {
         }
     }
 
-    //文件解密
+    //本地上传BF加密文件解密功能
     @ResponseBody
     @RequestMapping(value = "/bfdecrypt", method = RequestMethod.POST)
     public String BFDecrypt(@RequestParam("file") MultipartFile multipartFile , @RequestParam("username") String username,HttpServletResponse response) throws IOException, BadPaddingException, IllegalBlockSizeException {
@@ -92,7 +92,7 @@ public class BFEncDecController {
         return a;
     }
 
-    //文件上传
+    //云端上传文件进行加密的BF云端加密功能
     @ResponseBody
     @RequestMapping(value = "/bfupload", method = RequestMethod.POST)
     public String upload(@RequestParam("CreateUserName") String CreateUserName, @RequestParam("ParentId") int ParentId,@RequestParam("LoginUserName") String LoginUserName,@RequestParam("FileName") String FileName){
@@ -138,7 +138,7 @@ public class BFEncDecController {
         }
     }
 
-    //文件下载
+    //BF云端加密文件进行解密功能模块
     @ResponseBody
     @RequestMapping(value = "/bfdownload", method = RequestMethod.POST)
     public String download(@RequestParam("CreateUserName") String CreateUserName, @RequestParam("ParentId") int ParentId,@RequestParam("LoginUserName") String LoginUserName,@RequestParam("FileName") String FileName) throws BadPaddingException, IllegalBlockSizeException, IOException {
