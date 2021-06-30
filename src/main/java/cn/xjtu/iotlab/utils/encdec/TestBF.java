@@ -838,7 +838,7 @@ public class TestBF {
         }
         return result;
     }
-
+    //根据文件以及当前登录的使用用户进行文件加密的主要功能函数
     public String filebfencrpt(File file, String username){
         System.out.println("------"+username);
         File dirFile = new  File("src/main/resources/iotlab/"+username+"/BF加密");
@@ -857,6 +857,7 @@ public class TestBF {
             return null;
         }
         String name = f.getName();
+        String type=name.substring(name.lastIndexOf("."));
         en_name = aes.encrypt(name);
         filedir = f.getAbsolutePath();
         content = allF.readFile(filedir);
@@ -864,7 +865,7 @@ public class TestBF {
         System.out.println(en_content);
         String[] kw = kwAbstract(name);
         BF = kwBF(kw,0.001,rand);
-        File f1 = new File("src/main/resources/iotlab/"+ username+"/"+"BF加密/" +en_name+ ".enc");
+        File f1 = new File("src/main/resources/iotlab/"+ username+"/"+"BF加密/" +en_name+type);
         if (!f1.exists()) {
             try {
                 f1.createNewFile();
@@ -918,7 +919,7 @@ public class TestBF {
         }
         return f1.getPath();
     }
-
+    //根据文件以及当前登录的使用用户进行BF文件解密的主要功能函数
     public String filebfdecrpt(File file, String username) throws BadPaddingException, IllegalBlockSizeException, IOException {
         unZip zips=new unZip();
         String returnpath="";
@@ -930,7 +931,7 @@ public class TestBF {
         String pt = file.getName();
         String name = file.getName();
         pt=pt.substring(pt.indexOf(".")+1);
-        if(pt.compareTo("enc")!=0) return null;
+//      if(pt.compareTo("enc")!=0) return null;
         String fromother="";
         //String owner_name=name.substring(name.indexOf("__")+1);
         if(name.indexOf("___")!=-1){

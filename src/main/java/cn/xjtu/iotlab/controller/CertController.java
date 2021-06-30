@@ -22,7 +22,7 @@ public class CertController {
     @Autowired
     private CertServiceImpl CertService;
 
-    //生成证书
+    //生成证书，给指定的用户生成选择权限的字段
     @ResponseBody
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public Object certProduce(@RequestParam("authorizeduser")String authorizeduser,@RequestParam("authoruser") String authoruser, @RequestParam("accesstype") int accesstype){
@@ -61,7 +61,7 @@ public class CertController {
             return jsonObject;
         }
     }
-
+    //获取到该用户，并展示所有的该用户发出证书的列表
     @ResponseBody
     @RequestMapping(value = "/getlist", method = RequestMethod.GET)
     public Object certList(HttpServletRequest req) {
@@ -70,6 +70,7 @@ public class CertController {
         return CertService.certList(authorUser);
     }
 
+    //对选择的指定证书进行删除
     @ResponseBody
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public Object deleteCert(@RequestParam("authorizeduser") String authorizeduser,@RequestParam("authoruser") String authoruser,@RequestParam("accesstype") int accesstype){
