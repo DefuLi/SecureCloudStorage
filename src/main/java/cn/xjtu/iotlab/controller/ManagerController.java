@@ -2,6 +2,7 @@ package cn.xjtu.iotlab.controller;
 
 import cn.xjtu.iotlab.service.ManagerService;
 import cn.xjtu.iotlab.vo.Behavior;
+import cn.xjtu.iotlab.vo.User;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,11 +58,25 @@ public class ManagerController {
      * @param req 请求
      * @return json对象
      */
-    @RequestMapping(value = "/getRegisters", method = RequestMethod.POST)
-    public Object getRegister(HttpServletRequest req) {
+    @RequestMapping(value = "/getRegisters", method = RequestMethod.GET)
+    public void getRegister(HttpServletRequest req,HttpServletResponse response) throws IOException {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("tableData", managerService.getRegister());
-        return jsonObject;
+        List<LinkedHashMap> lists = new ArrayList<>();
+        List<User> userList = managerService.getRegister();
+        for (User user: userList) {
+            LinkedHashMap<String,String> hashMap = new LinkedHashMap<>();
+            hashMap.put("userName",user.getName());
+            hashMap.put("id",user.getId().toString());
+            hashMap.put("status","未审核");
+            Date date = new Date(); // this object contains the current date value
+            SimpleDateFormat start = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String create_date = start.format(date);//结束时间
+            hashMap.put("createTime",create_date);
+            lists.add(hashMap);
+        }
+        jsonObject.put("tableData",lists);
+        response.setContentType("text/html;charset=utf-8");
+        response.getWriter().write(jsonObject.toJSONString());
     }
 
     /**
@@ -70,13 +85,22 @@ public class ManagerController {
      * @param req 请求
      * @return json对象
      */
-    @RequestMapping(value = "/userBehavior", method = RequestMethod.POST)
-    public Object userBehavior(HttpServletRequest req) {
-        Behavior behavior = managerService.userBehavior();
-        float score = managerService.computeScore();
+    @RequestMapping(value = "/userBehavior", method = RequestMethod.GET)
+    public void userBehavior(HttpServletRequest req,HttpServletResponse response) throws IOException {
+        List<Behavior> behaviorList = managerService.userBehavior();
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("behavior", behavior);
-        jsonObject.put("score", score);
-        return jsonObject;
+        List<LinkedHashMap> lists = new ArrayList<>();
+        for(Behavior behavior : behaviorList){
+            LinkedHashMap<String,String> hashMap = new LinkedHashMap<>();
+            hashMap.put("userName",behavior.getName());
+            hashMap.put("score",managerService.computeScoreById(behavior.getId()).toString());
+            hashMap.put("uploadCount",((Integer)behavior.getUploadCount()).toString());
+            hashMap.put("fileSize",((Float)behavior.getFileSize()).toString());
+            hashMap.put("applyCertCount",((Integer)behavior.getApplyCertCount()).toString());
+            lists.add(hashMap);
+        }
+        jsonObject.put("tableData",lists);
+        response.setContentType("text/html;charset=utf-8");
+        response.getWriter().write(jsonObject.toJSONString());
     }
 }

@@ -29,16 +29,16 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    public Behavior userBehavior() {
-        Behavior behavior = managerMapper.userBehavior();
+    public List<Behavior> userBehavior() {
+        List<Behavior> behaviorList = managerMapper.userBehavior();
         // TODO 需要有一个中转程序，收集各模块的行为，
         //  判断lastTime是否为近7天，否则更新数据。
-        return behavior;
+        return behaviorList;
     }
 
     @Override
-    public float computeScore() {
+    public Float computeScoreById(int id) {
         // TODO 待实现
-        return 0;
+        return 0f;
     }
 }

@@ -6,10 +6,19 @@ public class User {
     private Integer id;
     private String name;
     private String password;
+    private String token;
     private String avatar;
     private List<String> access;
     // 0为未经管理员审批，1为经过管理员审批
     private Integer approveFlag;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public List<String> getAccess() {
         return access;

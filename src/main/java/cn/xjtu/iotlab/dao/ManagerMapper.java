@@ -16,5 +16,5 @@ public interface ManagerMapper {
 
     List<User> getRegister();
 
-    Behavior userBehavior();
+    List<Behavior> userBehavior();
 }

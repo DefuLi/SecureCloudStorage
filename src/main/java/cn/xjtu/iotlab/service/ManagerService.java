@@ -16,7 +16,7 @@ public interface ManagerService {
 
     List<User> getRegister();
 
-    Behavior userBehavior();
+    List<Behavior> userBehavior();
 
-    float computeScore();
+    Float computeScoreById(int id);
 }
