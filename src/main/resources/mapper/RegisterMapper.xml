@@ -8,11 +8,12 @@
         <result column="token" jdbcType="VARCHAR" property="token" />
         <result column="avatar" jdbcType="VARCHAR" property="avatar" />
         <result column="approveflag" jdbcType="INTEGER" property="approveFlag" />
+        <result column="applyDate" jdbcType="TIMESTAMP" property="applyDate"/>
     </resultMap>
 
     <insert id = "register" parameterType="cn.xjtu.iotlab.vo.User">
-        insert into user(name, password, token, avatar, approveflag)
-        values(#{name}, #{password}, #{token}, #{avatar}, #{approveFlag})
+        insert into user(name, password, token, avatar, approveflag,applyDate)
+        values(#{name}, #{password}, #{token}, #{avatar}, #{approveFlag},#{applyDate})
     </insert>
 
 </mapper>

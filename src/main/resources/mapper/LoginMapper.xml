@@ -18,7 +18,7 @@
     </sql>
 
     <select id="verifyPasswd" resultType="java.lang.Integer">
-    SELECT count(*) FROM user where name = #{0} and password = #{1} ;
+    SELECT count(*) FROM user where approveflag =1 and name = #{0} and password = #{1} ;
   </select>
 
     <select id="isApprove" resultType="java.lang.Integer">
