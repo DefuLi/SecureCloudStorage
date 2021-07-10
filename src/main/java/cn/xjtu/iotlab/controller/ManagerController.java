@@ -68,10 +68,7 @@ public class ManagerController {
             hashMap.put("userName",user.getName());
             hashMap.put("id",user.getId().toString());
             hashMap.put("status","未审核");
-            Date date = new Date(); // this object contains the current date value
-            SimpleDateFormat start = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String create_date = start.format(date);//结束时间
-            hashMap.put("createTime",create_date);
+            hashMap.put("createTime",user.getApplyDate());
             lists.add(hashMap);
         }
         jsonObject.put("tableData",lists);

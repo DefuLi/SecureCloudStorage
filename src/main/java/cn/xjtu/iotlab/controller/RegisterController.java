@@ -35,6 +35,10 @@ public class RegisterController {
     public Object register(HttpServletRequest req, HttpSession session) {
         String name = req.getParameter("userName");
         String password = req.getParameter("password");
+        Date date = new Date(); // this object contains the current date value
+        SimpleDateFormat start = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String create_date = start.format(date);//结束时间
+
         User user = new User();
         user.setName(name);
         user.setPassword(password);
@@ -42,7 +46,7 @@ public class RegisterController {
         List<String> access = new ArrayList<>();
         access.add(name);
         user.setAccess(access);
-
+        user.setApplyDate(create_date);
         try {
             registerService.register(user);
             return true;

@@ -11,6 +11,15 @@ public class User {
     private List<String> access;
     // 0为未经管理员审批，1为经过管理员审批
     private Integer approveFlag;
+    private String applyDate;
+
+    public String getApplyDate() {
+        return applyDate;
+    }
+
+    public void setApplyDate(String applyDate) {
+        this.applyDate = applyDate;
+    }
 
     public String getToken() {
         return token;
