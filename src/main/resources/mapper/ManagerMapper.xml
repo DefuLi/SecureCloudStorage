@@ -8,6 +8,7 @@
         <result column="token" jdbcType="VARCHAR" property="token"/>
         <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
         <result column="approveflag" jdbcType="INTEGER" property="approveFlag"/>
+        <result column="applyDate" jdbcType="TIMESTAMP" property="applyDate"/>
     </resultMap>
 
     <update id="approve">
