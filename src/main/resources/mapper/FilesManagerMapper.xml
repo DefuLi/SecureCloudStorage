@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xjtu.iotlab.dao.FilesManagerMapper">
+    <resultMap id="BaseResultMap" type="cn.xjtu.iotlab.vo.Files">
+        <id column="Id" jdbcType="INTEGER" property="id"/>
+        <result column="ParentId" jdbcType="INTEGER" property="ParentId"/>
+        <result column="Name" jdbcType="VARCHAR" property="Name"/>
+        <result column="Describe" jdbcType="VARCHAR" property="Describe"/>
+        <result column="CreateUserName" jdbcType="VARCHAR" property="CreateUserName"/>
+        <result column="CreateTime" jdbcType="DATE" property="CreateTime"/>
+        <result column="EditTime" jdbcType="DATE" property="EditTime"/>
+        <result column="EditBy" jdbcType="VARCHAR" property="EditBy"/>
+        <result column="Type" jdbcType="INTEGER" property="Type"/>
+        <result column="FileType" jdbcType="INTEGER" property="FileType"/>
+        <result column="Size" jdbcType="INTEGER" property="Size"/>
+        <result column="SuffixName" jdbcType="VARCHAR" property="SuffixName"/>
+
+    </resultMap>
+
+    <select id="getAllFileList" parameterType="java.lang.String" resultType="cn.xjtu.iotlab.vo.Files">
+        select * from fileList where CreateUserName = #{CreateUserName}
+    </select>
+
+    <select id="getRootFile" parameterType="java.lang.String" resultType="cn.xjtu.iotlab.vo.Files">
+        select * from fileList where ParentId = 0 and CreateUserName = #{CreateUserName}
+    </select>
+
+    <insert id = "insertFiles" parameterType="cn.xjtu.iotlab.vo.Files">
+        insert into fileList(Id,ParentId,`Name`,`Describe`,CreateUserName,CreateTime,EditTime,EditBy,`Type`,FileType,`Size`,SuffixName)
+        values(#{Id},#{ParentId},#{Name},#{Describe},#{CreateUserName},#{CreateTime},#{EditTime},#{EditBy},#{Type},#{FileType},#{Size},#{SuffixName})
+    </insert>
+
+    <select id="searchById" resultMap="BaseResultMap">
+        select * from fileList where Id=#{0}
+    </select>
+
+    <select id="getAllId" resultType="java.lang.Integer">
+        select Id as Id from fileList
+    </select>
+
+    <delete id="deleteAll">
+        delete from fileList
+    </delete>
+
+    <select id="getFilesByNameLocal" parameterType="java.lang.String" resultType="cn.xjtu.iotlab.vo.Files">
+        select * from fileList where CreateUserName = #{1} and Name like #{0} and SuffixName like #{2}
+    </select>
+
+    <select id="getFilesByNameGlobal" parameterType="java.lang.String" resultType="cn.xjtu.iotlab.vo.Files">
+        select * from fileList where Name like #{0} and SuffixName like #{1}
+    </select>
+
+    <insert id="insertFilesBF" parameterType="cn.xjtu.iotlab.vo.BFFile">
+        insert into fileBF(id, `name`, BFValue) values(#{id}, #{name}, #{BFValue})
+    </insert>
+
+    <select id="getIdByName" resultType="java.lang.Integer">
+        select min(Id) from fileList where Name = #{0} and CreateUserName = #{1} and ParentId = #{2}
+    </select>
+
+    <select id="getFilesByBFLocal" parameterType="java.lang.String" resultType="cn.xjtu.iotlab.vo.Files">
+        select * from fileList where CreateUserName = #{1} and SuffixName like #{2} and Id in(
+        select id from fileBF where BFValue = #{0}
+        )
+    </select>
+
+    <select id="getFilesByBFGlobal" resultType="cn.xjtu.iotlab.vo.Files">
+        select * from fileList where Id and SuffixName like #{1} in(
+        select distinct id from fileBF where BFValue = #{0}
+        )
+    </select>
+
+    <select id="getMaxId" resultType="java.lang.Integer">
+        select max(Id) from fileList
+    </select>
+
+    <select id="getBFencPID" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select Id from fileList where `Name` = 'BF加密' and ParentId = 0 and CreateUserName = #{username}
+    </select>
+
+    <select id="getBFdecPID" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select Id from fileList where `Name` = 'BF解密' and ParentId = 0 and CreateUserName = #{username}
+    </select>
+</mapper>
